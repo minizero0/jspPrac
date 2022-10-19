@@ -11,10 +11,20 @@
 		int a = 1;
 		int b = 1;
 		
-		a++;
-		b++;
-		session.setAttribute("a", a);
-		application.setAttribute("b", b);
+		if(session.getAttribute("a")!=null){
+			a = (Integer)session.getAttribute("a");
+		}
+		
+		if (application.getAttribute("b")!=null){
+			b = (Integer)application.getAttribute("b");
+		}
+		
+		session.setAttribute("a", a+10);
+		application.setAttribute("b", b+10);
 	%>						
+	
+	세션변수 a : <%= a %><br>
+	어플리케이션 변수 b : <%= b %><br>
+	<hr>
 </body>
 </html>
