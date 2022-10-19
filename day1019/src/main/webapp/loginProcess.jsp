@@ -19,6 +19,7 @@
 		b.setPwd(pwd);
 		MemberDAO1 dao = new MemberDAO1();
 		if(dao.isMember(id, pwd)){
+			session.setAttribute("login", "yes");
 			response.sendRedirect("index.jsp");
 		}else{
 			response.sendRedirect("login.html");

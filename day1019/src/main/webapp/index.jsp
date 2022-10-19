@@ -9,6 +9,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%
+		if(session.getAttribute("login") == null || !session.getAttribute("login").equals("yes"))
+		{
+			response.sendRedirect("login.html");
+		}
+	%>
 	<h2>서비스 문서입니다.</h2>
 	<hr>
 </body>
