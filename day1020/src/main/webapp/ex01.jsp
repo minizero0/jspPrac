@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href = "ex02.jsp?name=홍길동&age=20"></a> <!-- query 스트링 -->
+	<a href = "ex02.jsp?name=Spiderman&age=20&addr=seoul&phone=010-1234-5678">연결</a> <!-- query 스트링 -->
+	
 </body>
 </html>
