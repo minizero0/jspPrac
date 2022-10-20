@@ -12,6 +12,9 @@
 		if(session.getAttribute("member")!=null){
 			MemberVO m = (MemberVO)session.getAttribute("member");
 			out.print(m.getId() + "님 로그인하셨습니다.<hr>");
+			%>
+			<a href = "logout.jsp">로그아웃</a>
+			<%
 			
 		}else{
 			out.print("비정상적인 접근입니다.");
