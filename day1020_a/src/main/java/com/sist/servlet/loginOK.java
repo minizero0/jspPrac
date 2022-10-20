@@ -29,10 +29,10 @@ public class loginOK extends HttpServlet{
 		if(dao.isMember(id, pwd)) {
 			MemberVO m = dao.findById(id);
 			HttpSession session = req.getSession();
-			out.print("<h2> id :"+ m.getId()+"</h2>");
-			out.print("<h2> name : " + m.getName() +"</h2>");
+			session.setAttribute("member", m);
+			resp.sendRedirect("main.jsp");
 		}else {
-			out.print("세션오류");
+			resp.sendRedirect("login.jsp");
 		}
 	}
 	
