@@ -8,7 +8,8 @@
 </head>
 <body>
 	<h2>login</h2>
-	<form action = "loginProcess.jsp" method = "post">
+	<!-- <form action = "loginProcess.jsp" method = "post"> -->
+	<form action="loginOK" method = "post">
 		아이디 : <input type = "text" name= "id"><br>
 		비밀번호 : <input type = "password" name= "pwd"><br>
 		<input type = "submit" value = "login">
