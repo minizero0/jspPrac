@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body>	
 	<%	
 		if(session.getAttribute("member")!=null){
 			MemberVO m = (MemberVO)session.getAttribute("member");
@@ -18,11 +18,5 @@
 			response.sendRedirect("login.jsp");
 		}
 	%>
-
-	서비스 문서입니다.
-	<br>
-	<a href = "service1.jsp">서비스1</a><br>
-	<a href = "service2.jsp">서비스2</a><br>
-	<a href = "service3.jsp">서비스3</a><br>
 </body>
 </html>
