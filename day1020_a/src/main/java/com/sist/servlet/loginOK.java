@@ -28,8 +28,9 @@ public class loginOK extends HttpServlet{
 		MemberDAO1 dao = new MemberDAO1();
 		if(dao.isMember(id, pwd)) {
 			MemberVO m = dao.findById(id);
-			HttpSession session = req.getSession();
-			session.setAttribute("member", m);
+//			HttpSession session = req.getSession();
+//			session.setAttribute("member", m);
+			req.getSession().setAttribute("member", m);		//위와 같은 문장이다.
 			resp.sendRedirect("main.jsp");
 		}else {
 			resp.sendRedirect("login.jsp");
