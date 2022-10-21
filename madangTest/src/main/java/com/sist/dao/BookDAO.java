@@ -28,13 +28,13 @@ public class BookDAO {
 	}
 	
 	
-	public BookVO findByName(String bookname) {
+	public BookVO findById(int bookid) {
 		BookVO bv = null;
-		String sql = "select * from book where bookname = ?";
+		String sql = "select * from book where bookid = ?";
 		try {
 			conn = DriverManager.getConnection(URL,USER,PWD);
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, bookname);
+			pstmt.setInt(1, bookid);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				bv = new BookVO();

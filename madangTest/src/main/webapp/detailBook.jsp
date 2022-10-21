@@ -12,8 +12,8 @@
 <body>
 	<%
 		request.setCharacterEncoding("utf-8");
-		String bookname = request.getParameter("bookname");
-		BookVO bv = dao.findByName(bookname);
+		int bookid = Integer.parseInt(request.getParameter("bookid"));
+		BookVO bv = dao.findById(bookid);
 	%>
 	<h2>bookid : <%= bv.getBookid() %></h2>
 	<h2>bookname : <%=  bv.getBookname() %></h2>

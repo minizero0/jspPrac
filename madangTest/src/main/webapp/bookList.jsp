@@ -16,8 +16,6 @@
 			<tr>
 				<th>bookid</th>
 				<th>bookname</th>
-				<th>publisher</th>
-				<th>price</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,9 +26,7 @@
 					%>
 						<tr>
 							<td><%=b.getBookid() %></td>
-							<td><a href = "detailBook.jsp?bookname=<%=b.getBookname() %>"><%=b.getBookname() %></a></td>
-							<td><%=b.getPublisher() %></td>
-							<td><%=b.getPrice() %></td>
+							<td><a href = "detailBook.jsp?bookid=<%=b.getBookid() %>"><%=b.getBookname() %></a></td>
 						</tr>
 					<%
 					count++;
