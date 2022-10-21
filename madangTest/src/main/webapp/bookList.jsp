@@ -10,7 +10,6 @@
 </head>
 <body>
 	<h3><a href = "insertBook.jsp">등록</a></h3>
-	<h3><a href = "updateBook.jsp">수정</a></h3>
 	<jsp:useBean id="dao" class = "com.sist.dao.BookDAO" />
 	<table border = "1">
 		<thead>

@@ -19,6 +19,7 @@
 	<h2>bookname : <%=  bv.getBookname() %></h2>
 	<h2>publisher : <%= bv.getPublisher() %></h2>
 	<h2>price : <%= bv.getPrice() %></h2>
-	<h2><a href = "updateDept.jsp?bookid=<%=bv.getBookid()%>">수정</a></h2> 
+	<h2><a href = "updateBook.jsp?bookid=<%=bv.getBookid()%>">수정</a></h2> 
+	<h2><a href = "deleteBookProcess.jsp?bookid=<%=bv.getBookid()%>">삭제</a></h2> 
 </body>
 </html>

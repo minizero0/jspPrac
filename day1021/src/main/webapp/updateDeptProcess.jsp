@@ -17,7 +17,7 @@
 		int dno1 = Integer.parseInt(request.getParameter("dno1"));
 		
 		int re = dao.updateDept(dv, dno1);
-		if(re >0){
+		if(re > 0){
 			response.sendRedirect("deptList.jsp");
 		}else{
 			response.sendRedirect("updateDept.jsp");
