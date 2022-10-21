@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function checkDelete(bookid) {
+		var re = confirm("정말로 삭제하시겠어요?")
+		if (re == true){
+			location.href = "deleteBookProcess.jsp?bookid="+bookid;
+		}
+	}
+</script>
 </head>
 
 <jsp:useBean id="dao" class = "com.sist.dao.BookDAO"/>
@@ -20,6 +28,6 @@
 	<h2>publisher : <%= bv.getPublisher() %></h2>
 	<h2>price : <%= bv.getPrice() %></h2>
 	<h2><a href = "updateBook.jsp?bookid=<%=bv.getBookid()%>">수정</a></h2> 
-	<h2><a href = "deleteBookProcess.jsp?bookid=<%=bv.getBookid()%>">삭제</a></h2> 
+	<h2><a href = "#" onclick="checkDelete(<%=bv.getBookid()%>)">삭제</a></h2> 
 </body>
 </html>

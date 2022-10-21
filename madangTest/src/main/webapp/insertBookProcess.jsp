@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 
 <body>
@@ -16,10 +17,22 @@
 	<jsp:setProperty property="*" name="bv"/>
 	<%
 		int re = dao.insertBook(bv);
-		if(re > 0 )
-			response.sendRedirect("bookList.jsp");
-		else
-			out.print("등록실패");
+		if(re > 0 ){
+			%>
+			<script type="text/javascript">
+				alert("도서 등록완료");
+				location.href = "bookList.jsp"
+			</script>
+			<%
+		}
+		else{
+			%>
+			<script type="text/javascript">
+				alert("도서 등록실패");
+				location.href = "bookList.jsp"
+			</script>
+			<%
+		}
 	%>
 </body>
 </html>
