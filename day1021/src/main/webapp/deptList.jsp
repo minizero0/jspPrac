@@ -12,6 +12,7 @@
 <h2>dept Table</h2>
 <hr>
 <jsp:useBean id="dao" class = "com.sist.dao.deptDAO"></jsp:useBean>
+<a href = "insertDept.jsp">등록</a>
 <table border = "1">
 <thead>
 	<tr>

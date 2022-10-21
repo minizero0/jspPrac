@@ -28,6 +28,92 @@ public class deptDAO {
 		}
 	}
 	
+	public int updateDept(deptVO dv, int dno1) {
+		String sql = "update dept set dno = ?, dname = ?, dloc = ? where dno = ?";
+		int re = 0;
+		try {
+		conn = DriverManager.getConnection(URL,USER,PWD);
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, dv.getDno());
+		pstmt.setString(2, dv.getDname());
+		pstmt.setString(3, dv.getDloc());
+		pstmt.setInt(4, dno1);
+		re = pstmt.executeUpdate();
+		
+	}catch (Exception e) {
+		System.out.println("Exception" + e.getMessage());
+	}finally {
+		if(rs!=null) {
+			try {
+			rs.close();
+			}
+		catch (Exception e) {
+			System.out.println("Exception"+e.getMessage());
+			}
+		}
+		if(pstmt!=null) {
+			try {
+			pstmt.close();
+			}
+		catch (Exception e) {
+			System.out.println("Exception"+e.getMessage());
+			}
+		}
+		if(conn!=null) {
+			try {
+			conn.close();
+			}
+		catch (Exception e) {
+			System.out.println("Exception"+e.getMessage());
+			}
+		}
+	}
+	return re;
+	}
+	
+	
+	public int insertDept(deptVO dv) {
+		String sql = "insert into dept(dno,dname,dloc) values(?,?,?)";
+		int re = 0;
+		try {
+			conn = DriverManager.getConnection(URL,USER,PWD);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dv.getDno());
+			pstmt.setString(2, dv.getDname());
+			pstmt.setString(3, dv.getDloc());
+			re = pstmt.executeUpdate();
+		}catch (Exception e) {
+			System.out.println("Exception" + e.getMessage());
+		}finally {
+			if(rs!=null) {
+				try {
+				rs.close();
+				}
+			catch (Exception e) {
+				System.out.println("Exception"+e.getMessage());
+				}
+			}
+			if(pstmt!=null) {
+				try {
+				pstmt.close();
+				}
+			catch (Exception e) {
+				System.out.println("Exception"+e.getMessage());
+				}
+			}
+			if(conn!=null) {
+				try {
+				conn.close();
+				}
+			catch (Exception e) {
+				System.out.println("Exception"+e.getMessage());
+				}
+			}
+		}
+		return re;
+	}
+	
+	
 	public deptVO findByNo(int dno){
 		deptVO d = null;
 		String sql = "select * from dept where dno = ?";
