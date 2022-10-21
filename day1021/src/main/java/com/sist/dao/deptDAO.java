@@ -2,6 +2,7 @@ package com.sist.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class deptDAO {
 	final String PWD = "madang";
 	Connection conn = null;
 	Statement stmt = null;
+	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
 	public deptDAO() {
@@ -26,7 +28,51 @@ public class deptDAO {
 		}
 	}
 	
-	
+	public deptVO findByNo(int dno){
+		deptVO d = null;
+		String sql = "select * from dept where dno = ?";
+		try {
+			conn = DriverManager.getConnection(URL,USER,PWD);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dno);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				d = new deptVO();
+				d.setDno(rs.getInt("dno"));
+				d.setDname(rs.getString("dname"));
+				d.setDloc(rs.getString("dloc"));
+			}
+			
+		}catch (Exception e) {
+			System.out.println("Exceoption" );
+		}finally {
+			if(rs!=null) {
+				try {
+				rs.close();
+				}
+			catch (Exception e) {
+				System.out.println("Exception"+e.getMessage());
+				}
+			}
+			if(pstmt!=null) {
+				try {
+				pstmt.close();
+				}
+			catch (Exception e) {
+				System.out.println("Exception"+e.getMessage());
+				}
+			}
+			if(conn!=null) {
+				try {
+				conn.close();
+				}
+			catch (Exception e) {
+				System.out.println("Exception"+e.getMessage());
+				}
+			}
+		}
+		return d;
+	}
 	
 	public ArrayList<deptVO> findAll(){
 		ArrayList<deptVO> list = new ArrayList<>();

@@ -16,8 +16,6 @@
 <thead>
 	<tr>
 		<th>부서번호</th>
-		<th>부서이름</th>
-		<th>부서위치</th>
 	</tr>
 </thead>
 <%
@@ -26,9 +24,7 @@
 	for(deptVO d : list){
 		%>
 		<tr>
-			<td><%=d.getDno() %></td>
-			<td><%=d.getDname() %></td>
-			<td><%=d.getDloc() %></td>
+			<td><a href = "detailDept.jsp?dno=<%=d.getDno()%>"><%=d.getDno() %></a></td>
 		</tr>
 		<%
 		counter++;
