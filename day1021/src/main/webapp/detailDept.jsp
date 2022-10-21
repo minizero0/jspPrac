@@ -14,7 +14,7 @@
 	deptVO dv = dao.findByNo(dno);
 	
 %>
-
+<h2>부서번호 : <%=dv.getDno() %></h2>
 <h2>부서이름 : <%=dv.getDname() %></h2>
 <h2>부서위치 : <%=dv.getDloc() %></h2>
 
