@@ -27,6 +27,50 @@ public class BookDAO {
 		}
 	}
 	
+	public int insertBook(BookVO bv) {
+		int re = 0;
+		String sql = "insert into book values(?,?,?,?)";
+		try {
+			conn = DriverManager.getConnection(URL,USER,PWD);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bv.getBookid());
+			pstmt.setString(2, bv.getBookname());
+			pstmt.setString(3, bv.getPublisher());
+			pstmt.setInt(4, bv.getPrice());
+			re = pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			System.out.println("Exception" + e.getMessage());
+		}finally {
+			if(rs!=null) {
+				try {
+				rs.close();
+				}
+			catch (Exception e) {
+				System.out.println("Exception"+e.getMessage());
+				}
+			}
+			if(pstmt!=null) {
+				try {
+				pstmt.close();
+				}
+			catch (Exception e) {
+				System.out.println("Exception"+e.getMessage());
+				}
+			}
+			if(conn!=null) {
+				try {
+				conn.close();
+				}
+			catch (Exception e) {
+				System.out.println("Exception"+e.getMessage());
+				}
+			}
+		}
+		
+		return re;
+	}
+	
 	
 	public BookVO findById(int bookid) {
 		BookVO bv = null;

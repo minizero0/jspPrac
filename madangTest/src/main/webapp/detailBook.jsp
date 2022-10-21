@@ -19,5 +19,6 @@
 	<h2>bookname : <%=  bv.getBookname() %></h2>
 	<h2>publisher : <%= bv.getPublisher() %></h2>
 	<h2>price : <%= bv.getPrice() %></h2>
+	<h2><a href = "updateDept.jsp?bookid=<%=bv.getBookid()%>">수정</a></h2> 
 </body>
 </html>
