@@ -16,7 +16,8 @@
 
 <h2>부서 수정</h2>
 <form action="updateDeptProcess.jsp?dno1=<%=d.getDno()%>" method = "post">
-	부서번호 : <input type = "text" name = "dno" value = "<%=d.getDno()%>"><br>
+	부서번호 : <%= d.getDno() %><br>
+	수정할 부서번호 : <input type = "text" name = "dno" value = "<%=d.getDno()%>"><br>
 	부서이름 : <input type = "text" name = "dname" value = "<%=d.getDname()%>"><br>
 	부서위치 : <input type = "text" name = "dloc" value = "<%=d.getDloc()%>"><br>
 	<input type = "submit" value = "등록">
