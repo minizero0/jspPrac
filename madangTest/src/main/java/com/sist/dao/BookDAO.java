@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.sist.vo.BookVO;
+import com.sist.vo.CustomerOrdersVO;
 
 public class BookDAO {
 	final String DRIVER_NAME = "oracle.jdbc.driver.OracleDriver";
@@ -26,6 +27,59 @@ public class BookDAO {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public ArrayList<CustomerOrdersVO> listOrders(String name){
+		ArrayList<CustomerOrdersVO> list = new ArrayList<>();
+		String sql = "select bookname, price, orderdate "
+				+ "from customer c, orders o, book b "
+				+ "where c.custid = o.custid and "
+				+ "b.bookid = o.bookid and name =?";
+		try {
+			conn = DriverManager.getConnection(URL,USER,PWD);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				CustomerOrdersVO cv = new CustomerOrdersVO();
+				cv.setBookname(rs.getString("bookname"));
+				cv.setPrice(rs.getInt("price"));
+				cv.setOrderDate(rs.getDate("orderdate"));
+				list.add(cv);
+			}
+		}catch (Exception e) {
+			System.out.println("Exception" + e.getMessage());
+		}finally {
+			if(rs!=null) {
+				try {
+				rs.close();
+				}
+			catch (Exception e) {
+				System.out.println("Exception"+e.getMessage());
+				}
+			}
+			if(pstmt!=null) {
+				try {
+				pstmt.close();
+				}
+			catch (Exception e) {
+				System.out.println("Exception"+e.getMessage());
+				}
+			}
+			if(conn!=null) {
+				try {
+				conn.close();
+				}
+			catch (Exception e) {
+				System.out.println("Exception"+e.getMessage());
+				}
+			}
+		}
+		
+		
+		return list;
+	}
+	
+	
 	
 	public int deleteBook(int bookid) {
 		int re = 0;
