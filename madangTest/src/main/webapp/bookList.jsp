@@ -28,7 +28,7 @@
 					%>
 						<tr>
 							<td><%=b.getBookid() %></td>
-							<td><%=b.getBookname() %></td>
+							<td><a href = "detailBook.jsp?bookname=<%=b.getBookname() %>"><%=b.getBookname() %></a></td>
 							<td><%=b.getPublisher() %></td>
 							<td><%=b.getPrice() %></td>
 						</tr>
