@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function checkDelete(dno) {
+		var re = confirm("정말로 삭제하시겠어요?")
+		if (re == true){
+			location.href = "deleteDeptProcess.jsp?dno="+dno;
+		}
+	}
+</script>
 </head>
 <body>
 <jsp:useBean id="dao" class = "com.sist.dao.deptDAO"/>
@@ -20,6 +28,8 @@
 <h2>부서위치 : <%=dv.getDloc() %></h2>
 <hr>
 <a href = "updateDept.jsp?dno=<%=dno%>">수정</a>
+<a href ="#" onclick = "checkDelete(<%=dno%>)">삭제</a>
+<%-- <a href = "deleteDeptProcess.jsp?dno=<%=dno%>">삭제</a> --%>
 
 </body>
 </html>

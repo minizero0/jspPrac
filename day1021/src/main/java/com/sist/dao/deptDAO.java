@@ -28,6 +28,45 @@ public class deptDAO {
 		}
 	}
 	
+	public int deleteDept(int dno) {
+		String sql = "delete dept where dno = ?";
+		int re = 0;
+		try {
+			conn = DriverManager.getConnection(URL,USER,PWD);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dno);
+			re = pstmt.executeUpdate();
+		}catch (Exception e) {
+			System.out.println("Exception" + e.getMessage());
+		}finally {
+			if(rs!=null) {
+				try {
+				rs.close();
+				}
+			catch (Exception e) {
+				System.out.println("Exception"+e.getMessage());
+				}
+			}
+			if(pstmt!=null) {
+				try {
+				pstmt.close();
+				}
+			catch (Exception e) {
+				System.out.println("Exception"+e.getMessage());
+				}
+			}
+			if(conn!=null) {
+				try {
+				conn.close();
+				}
+			catch (Exception e) {
+				System.out.println("Exception"+e.getMessage());
+				}
+			}
+		}
+		return re;
+	}
+	
 	public int updateDept(deptVO dv, int dno1) {
 		String sql = "update dept set dno = ?, dname = ?, dloc = ? where dno = ?";
 		int re = 0;
