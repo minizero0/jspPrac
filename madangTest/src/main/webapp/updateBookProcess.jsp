@@ -17,9 +17,19 @@
 <%
 	int re = dao.updateBook(bv);
 	if (re > 0){
-		response.sendRedirect("bookList.jsp");
+		%>
+		<script type="text/javascript">
+			alert("도서 수정완료.");
+			location.href = "detailBook.jsp?bookid="+<%=bv.getBookid()%>
+		</script>
+		<%
 	}else{
-		out.print("수정실패");
+		%>
+		<script type="text/javascript">
+			alert("도서 수정실패");
+			location.href  = "bookList.jsp";
+		</script>
+		<%
 	}
 %>
 </body>
