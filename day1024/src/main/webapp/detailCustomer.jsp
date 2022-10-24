@@ -23,6 +23,8 @@
 <h3>주소 : <%=vo.getAddress() %></h3>
 <h3>번호 : <%=vo.getPhone() %></h3>
 <hr>
+<h4><a href = "updateCustomer.jsp?custid=<%=vo.getCustid()%>">수정</a></h4>
+<h4><a href = "deleteCustomerOK.jsp?custid=<%=vo.getCustid()%>">삭제</a></h4>
 
 </body>
 </html>

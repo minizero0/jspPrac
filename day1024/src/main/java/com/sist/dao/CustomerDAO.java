@@ -15,6 +15,76 @@ import com.sist.vo.CustomerVO;
 
 public class CustomerDAO {
 	
+	public int updateCustomer(CustomerVO cv) {
+		int re = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "update customer set name = ?, address = ?, phone = ? where custid = ?";
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cv.getName());
+			pstmt.setString(2, cv.getAddress());
+			pstmt.setString(3, cv.getPhone());
+			pstmt.setInt(4, cv.getCustid());
+			re = pstmt.executeUpdate();
+		}catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			if(pstmt != null) {try {
+				pstmt.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}}
+			if(conn != null) {try {
+				conn.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}}
+		}
+		
+		
+		
+		return re;
+	}
+	
+	public int deleteCustomer(int custid) {
+		int re = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "delete customer where custid = ?";
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, custid);
+			re = pstmt.executeUpdate();
+		}catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			if(pstmt != null) {try {
+				pstmt.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}}
+			if(conn != null) {try {
+				conn.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}}
+		}
+		return re;
+				
+	}
+	
+	
 	public int insertCustomer(CustomerVO cv) {
 		int i = 0;
 		String sql = "insert into customer values(?,?,?,?)";
