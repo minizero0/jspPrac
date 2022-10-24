@@ -15,6 +15,56 @@ import com.sist.vo.BoardVO;
 
 public class BoardDAO {
 	
+	public BoardVO findByNo(int no) {
+		BoardVO bv = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "select * from board where no = ?";
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				bv = new BoardVO();
+				bv.setNo(rs.getInt("no"));
+				bv.setWriter(rs.getNString("writer"));
+				bv.setPwd(rs.getString("pwd"));
+				bv.setTitle(rs.getString("title"));
+				bv.setContent(rs.getString("content"));
+				bv.setRegdate(rs.getDate("regdate"));
+				bv.setHit(rs.getInt("hit"));
+			}
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(rs!=null) {try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(pstmt!=null) {try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		return bv;
+	}
+	
+	
 	public int insertBoard(BoardVO bv) {
 		int re = 0;
 		Connection conn = null;
@@ -100,8 +150,6 @@ public class BoardDAO {
 			}}
 			
 		}
-		
-		
 		return list;
 	}
 
