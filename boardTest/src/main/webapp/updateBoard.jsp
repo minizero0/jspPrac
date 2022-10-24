@@ -22,7 +22,7 @@
 		글암호 : <input type = "password" name = "pwd" value = "<%=bv.getPwd()%>"><br>
 		글제목 : <input type = "text" name = "title" value = "<%=bv.getTitle()%>"><br>
 		글내용 : 
-		<textarea rows="10" cols="60" name = "content" value = "<%=bv.getContent()%>" ></textarea><br>
+		<textarea rows="10" cols="60" name = "content"><%=bv.getContent()%></textarea><br>
 		<input type = "submit" value = "수정">
 		<input type = "reset" value = "취소">
 	</form>

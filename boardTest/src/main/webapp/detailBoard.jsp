@@ -23,13 +23,13 @@
 			vo = dao.findByNo(no);
 			dao.plusHit(no);
 			%>
-			<h4>no : <%=vo.getNo() %></h4>
-			<h4>title : <%=vo.getTitle() %></h4>
-			<h4>writer : <%=vo.getWriter() %></h4>
-			<h4>content :<br>
+			<h4>글번호 : <%=vo.getNo() %></h4>
+			<h4>글제목 : <%=vo.getTitle() %></h4>
+			<h4>작성자 : <%=vo.getWriter() %></h4>
+			<h4>글내용 :<br>
 			<textarea rows="10" cols="60" readonly="readonly"><%=vo.getContent() %></textarea> </h4>
-			<h4>regdate : <%=vo.getRegdate() %></h4>
-			<h4>hit : <%=vo.getHit() %></h4>
+			<h4>등록일 : <%=vo.getRegdate() %></h4>
+			<h4>조회수 : <%=vo.getHit() %></h4>
 			
 			<hr>
 			<h4><a href = "updateBoard.jsp?no=<%=vo.getNo()%>">수정</a></h4>
