@@ -16,11 +16,13 @@
 		vo = dao.findByCustid(custid);
 	}
 %>
-
-<h2>이름 : <%=vo.getName() %></h2>
-<h2>주소 : <%=vo.getAddress() %></h2>
-<h2>번호 : <%=vo.getPhone() %></h2>
-
+<h2>고객상세</h2>
+<hr>
+<h3>고객번호 : <%=vo.getCustid() %></h3>
+<h3>이름 : <%=vo.getName() %></h3>
+<h3>주소 : <%=vo.getAddress() %></h3>
+<h3>번호 : <%=vo.getPhone() %></h3>
+<hr>
 
 </body>
 </html>

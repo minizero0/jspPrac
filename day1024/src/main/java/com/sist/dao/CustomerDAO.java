@@ -31,6 +31,7 @@ public class CustomerDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				c = new CustomerVO();
+				c.setCustid(rs.getInt("custid"));
 				c.setName(rs.getString("name"));
 				c.setAddress(rs.getString("address"));
 				c.setPhone(rs.getString("phone"));
