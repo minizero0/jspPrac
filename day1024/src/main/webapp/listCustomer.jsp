@@ -12,6 +12,7 @@
 <body>
 <h2>고객목록</h2>
 <hr>
+
 	<%
 		request.setCharacterEncoding("utf-8");
 	%>
@@ -29,5 +30,6 @@
 				}
 			%>
 	</ul>
+	<h3><a href = "insertCustomer.jsp">고객등록</a></h3>
 </body>
 </html>

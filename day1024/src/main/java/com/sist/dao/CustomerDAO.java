@@ -15,6 +15,44 @@ import com.sist.vo.CustomerVO;
 
 public class CustomerDAO {
 	
+	public int insertCustomer(CustomerVO cv) {
+		int i = 0;
+		String sql = "insert into customer values(?,?,?,?)";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cv.getCustid());
+			pstmt.setString(2, cv.getName());
+			pstmt.setString(3, cv.getAddress());
+			pstmt.setString(4, cv.getPhone());
+			i = pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(pstmt != null) {try {
+				pstmt.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}}
+			if(conn != null) {try {
+				conn.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}}
+		}
+		
+		
+		return i;
+		
+	}
+	
 	public CustomerVO findByCustid(int custid){
 		CustomerVO c= null;
 		String sql = "select * from customer where custid = ?";
