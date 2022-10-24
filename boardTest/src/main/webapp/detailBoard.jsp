@@ -21,6 +21,7 @@
 		if(request.getParameter("no")!=null){
 			int no =  Integer.parseInt(request.getParameter("no")); 
 			vo = dao.findByNo(no);
+			dao.plusHit(no);
 		}
 	%>
 	<h4>no : <%=vo.getNo() %></h4>

@@ -15,6 +15,37 @@ import com.sist.vo.BoardVO;
 
 public class BoardDAO {
 	
+	public void plusHit(int no) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "update board set hit = hit+1 where no = ?";
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(pstmt!=null) {try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+	}
+	
 	public int deleteBoard(int no) {
 		int re = 0;
 		Connection conn = null;
