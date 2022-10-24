@@ -5,6 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function checkDelete(custid){
+		if(confirm("정말로 삭제하시겠어요?")){
+			location.href = "deleteCustomerOK.jsp?custid="+custid;
+		}
+	}
+</script>
 </head>
 <body>
 <jsp:useBean id="dao" class = "com.sist.dao.CustomerDAO"/>
@@ -24,7 +31,7 @@
 <h3>번호 : <%=vo.getPhone() %></h3>
 <hr>
 <h4><a href = "updateCustomer.jsp?custid=<%=vo.getCustid()%>">수정</a></h4>
-<h4><a href = "deleteCustomerOK.jsp?custid=<%=vo.getCustid()%>">삭제</a></h4>
+<h4><a href = "#" onclick = "checkDelete(<%=vo.getCustid()%>)">삭제</a></h4>
 
 </body>
 </html>
