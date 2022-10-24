@@ -7,13 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h2>게시물 등록</h2>
+	<hr>
 	<form action="insertBoardOK.jsp" method="post">
-		NO : <input type = "number" name = "no"><br>
-		Writer : <input type = "text" name = "writer"><br> 
-		Pwd : <input type = "text" name = "pwd"><br>
-		Title :<input type = "text" name = "title"><br>
-		Content : 
-		<textarea rows="10" cols="60"></textarea><br>
+		작성자 : <input type = "text" name = "writer"><br> 
+		글암호 : <input type = "password" name = "pwd"><br>
+		글제목 : <input type = "text" name = "title"><br>
+		글내용 : 
+		<textarea rows="10" cols="60" name = "content"></textarea><br>
 		<input type = "submit" value = "등록">
 		<input type = "reset" value = "취소">
 	</form>

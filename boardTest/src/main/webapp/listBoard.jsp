@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h2>게시물 리스트</h2>
+	<hr>
 	<%request.setCharacterEncoding("utf-8"); %>
 	<jsp:useBean id="dao" class = "com.sist.dao.BoardDAO"/>
 	<jsp:useBean id="vo" class = "com.sist.vo.BoardVO"/>

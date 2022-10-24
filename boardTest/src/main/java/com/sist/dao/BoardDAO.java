@@ -15,6 +15,73 @@ import com.sist.vo.BoardVO;
 
 public class BoardDAO {
 	
+	public int deleteBoard(int no) {
+		int re = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "delete board where no = ?";
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			re = pstmt.executeUpdate();
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(pstmt!=null) {try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		return re;
+	}
+	
+	public int updateBoard(BoardVO bv) {
+		int re = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "update board set writer = ?, pwd = ?, title = ?, content = ? where no = ?";
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bv.getWriter());
+			pstmt.setString(2, bv.getPwd());
+			pstmt.setString(3, bv.getTitle());
+			pstmt.setString(4, bv.getContent());
+			pstmt.setInt(5, bv.getNo());
+			re = pstmt.executeUpdate();
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(pstmt!=null) {try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		return re;
+	}
+	
+	
 	public BoardVO findByNo(int no) {
 		BoardVO bv = null;
 		Connection conn = null;
@@ -71,16 +138,15 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			String sql = "insert into board(no,writer,pwd,title,content) values(?,?,?,?,?)";
+			String sql = "insert into board(no,writer,pwd,title,content) values(seq_board.nextval,?,?,?,?)";
 			Context context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bv.getNo());
-			pstmt.setString(2, bv.getWriter());
-			pstmt.setString(3, bv.getPwd());
-			pstmt.setString(4, bv.getTitle());
-			pstmt.setString(5, bv.getContent());
+			pstmt.setString(1, bv.getWriter());
+			pstmt.setString(2, bv.getPwd());
+			pstmt.setString(3, bv.getTitle());
+			pstmt.setString(4, bv.getContent());
 			re = pstmt.executeUpdate();
 			
 		}catch (Exception e) {
