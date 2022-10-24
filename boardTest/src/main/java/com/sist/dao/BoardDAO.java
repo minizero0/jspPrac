@@ -82,16 +82,15 @@ public class BoardDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			String sql = "update board set writer = ?, pwd = ?, title = ?, content = ? where no = ?";
+			String sql = "update board set title = ?, content = ? where no = ? and pwd = ?";
 			Context context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, bv.getWriter());
-			pstmt.setString(2, bv.getPwd());
-			pstmt.setString(3, bv.getTitle());
-			pstmt.setString(4, bv.getContent());
-			pstmt.setInt(5, bv.getNo());
+			pstmt.setString(1, bv.getTitle());
+			pstmt.setString(2, bv.getContent());
+			pstmt.setInt(3, bv.getNo());
+			pstmt.setString(4, bv.getPwd());
 			re = pstmt.executeUpdate();
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
