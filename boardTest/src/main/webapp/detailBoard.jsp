@@ -1,3 +1,4 @@
+<%@page import="javax.swing.border.Border"%>
 <%@page import="com.sist.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -20,6 +21,7 @@
 	<%
 		if(request.getParameter("no")!=null){
 			int no =  Integer.parseInt(request.getParameter("no")); 
+			BoardVO b = new BoardVO();
 			vo = dao.findByNo(no);
 			dao.plusHit(no);
 			%>
@@ -28,9 +30,18 @@
 			<h4>작성자 : <%=vo.getWriter() %></h4>
 			<h4>글내용 :<br>
 			<textarea rows="10" cols="60" readonly="readonly"><%=vo.getContent() %></textarea> </h4>
-			<h4>등록일 : <%=vo.getRegdate() %></h4>
 			<h4>조회수 : <%=vo.getHit() %></h4>
+			<h4>등록일 : <%=vo.getRegdate() %></h4>
+			<%
+				String fname = vo.getFname();
+				if(fname.endsWith(".jpg")||fname.endsWith(".gif")||fname.endsWith(".png")){
+					
+				}else{
+					
+				}
+			%>
 			
+			<h4>첨부파일 : <a href = "data/<%=vo.getFname()%>"><%=vo.getFname() %></a></h4>
 			<hr>
 			<h4><a href = "updateBoard.jsp?no=<%=vo.getNo()%>">수정</a></h4>
 			<h4><a href = "deleteBoard.jsp?no=<%=vo.getNo()%>">삭제</a></h4>
