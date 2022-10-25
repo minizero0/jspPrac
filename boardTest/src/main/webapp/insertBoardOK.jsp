@@ -14,6 +14,8 @@
 </head>
 <body>
 	<%
+		String path2 = request.getRealPath("/data/a.txt");
+		out.println(path2);
 		request.setCharacterEncoding("utf-8");
 		String path = request.getRealPath("data");
 		MultipartRequest multi = new MultipartRequest(
@@ -38,11 +40,7 @@
 		int re = dao.insertBoard(b);
 		if(re > 0){
 			out.print("성공");
-			%>
-			<script type="text/javascript">
-				console.log(path);
-			</script>
-		<%
+			out.print(path);
 		}else{
 			out.print("실패");
 		}
