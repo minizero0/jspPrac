@@ -13,4 +13,5 @@ public class BoardVO {
 	private String content;
 	private Date regdate;
 	private int hit;
+	private String fname;
 }
