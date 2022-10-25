@@ -19,13 +19,13 @@
 	<hr>
 	<form action="updateBoardOK.jsp" method="post" enctype="multipart/form-data">
 		글번호 : <%=bv.getNo()%>
-		<input type = "hidden" name = "no" value = "<%=bv.getNo()%>"><br>
-		<input type = "hidden" name = "oldFname" value = "<%=oldFname%>">
-		작성자 : <input type = "text" name = "writer" value = "<%=bv.getWriter()%>"><br> 
-		글암호 : <input type = "password" name = "pwd" value = "<%=bv.getPwd()%>"><br>
-		글제목 : <input type = "text" name = "title" value = "<%=bv.getTitle()%>"><br>
+		<input type = "hidden" name = "no" value = "<%=bv.getNo()%>" required="required"><br>
+		<input type = "hidden" name = "oldFname" value = "<%=oldFname%>" required="required">
+		작성자 : <input type = "text" name = "writer" value = "<%=bv.getWriter()%>" required="required"><br> 
+		글암호 : <input type = "password" name = "pwd" value = "<%=bv.getPwd()%>" required="required"><br>
+		글제목 : <input type = "text" name = "title" value = "<%=bv.getTitle()%>" required="required"><br>
 		글내용 : 
-		<textarea rows="10" cols="60" name = "content"><%=bv.getContent()%></textarea><br>
+		<textarea rows="10" cols="60" name = "content" required="required"><%=bv.getContent()%></textarea><br>
 		<%
 		if(oldFname!=null){
 			if(SistUtil.isImg(oldFname)){
