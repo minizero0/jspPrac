@@ -83,15 +83,16 @@ public class BoardDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			String sql = "update board set title = ?, content = ? where no = ? and pwd = ?";
+			String sql = "update board set title = ?, content = ?,fname=? where no = ? and pwd = ?";
 			Context context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, bv.getTitle());
 			pstmt.setString(2, bv.getContent());
-			pstmt.setInt(3, bv.getNo());
-			pstmt.setString(4, bv.getPwd());
+			pstmt.setString(3, bv.getFname());
+			pstmt.setInt(4, bv.getNo());
+			pstmt.setString(5, bv.getPwd());
 			re = pstmt.executeUpdate();
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -135,6 +136,7 @@ public class BoardDAO {
 				bv.setContent(rs.getString("content"));
 				bv.setRegdate(rs.getDate("regdate"));
 				bv.setHit(rs.getInt("hit"));
+				bv.setFname(rs.getString("fname"));
 			}
 			
 		}catch (Exception e) {

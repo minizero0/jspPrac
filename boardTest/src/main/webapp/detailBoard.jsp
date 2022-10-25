@@ -1,3 +1,4 @@
+<%@page import="com.sist.util.SistUtil"%>
 <%@page import="javax.swing.border.Border"%>
 <%@page import="com.sist.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -22,29 +23,32 @@
 		if(request.getParameter("no")!=null){
 			int no =  Integer.parseInt(request.getParameter("no")); 
 			BoardVO b = new BoardVO();
-			vo = dao.findByNo(no);
+			b = dao.findByNo(no);
 			dao.plusHit(no);
 			%>
-			<h4>글번호 : <%=vo.getNo() %></h4>
-			<h4>글제목 : <%=vo.getTitle() %></h4>
-			<h4>작성자 : <%=vo.getWriter() %></h4>
+			<h4>글번호 : <%=b.getNo() %></h4>
+			<h4>글제목 : <%=b.getTitle() %></h4>
+			<h4>작성자 : <%=b.getWriter() %></h4>
 			<h4>글내용 :<br>
 			<textarea rows="10" cols="60" readonly="readonly"><%=vo.getContent() %></textarea> </h4>
-			<h4>조회수 : <%=vo.getHit() %></h4>
-			<h4>등록일 : <%=vo.getRegdate() %></h4>
+			<h4>조회수 : <%=b.getHit() %></h4>
+			<h4>등록일 : <%=b.getRegdate() %></h4>
 			<%
-				String fname = vo.getFname();
-				if(fname.endsWith(".jpg")||fname.endsWith(".gif")||fname.endsWith(".png")){
-					
+				String fname = b.getFname();
+				if(SistUtil.isImg(fname)){
+					%>
+					<img src = "data/<%=fname%>" width = "100" height = "100">
+					<%
 				}else{
-					
+					%>
+					<h4>첨부파일 : <a href = "data/<%=vo.getFname()%>"><%=vo.getFname() %></a></h4>
+					<%					
 				}
 			%>
 			
-			<h4>첨부파일 : <a href = "data/<%=vo.getFname()%>"><%=vo.getFname() %></a></h4>
 			<hr>
-			<h4><a href = "updateBoard.jsp?no=<%=vo.getNo()%>">수정</a></h4>
-			<h4><a href = "deleteBoard.jsp?no=<%=vo.getNo()%>">삭제</a></h4>
+			<h4><a href = "updateBoard.jsp?no=<%=b.getNo()%>">수정</a></h4>
+			<h4><a href = "deleteBoard.jsp?no=<%=b.getNo()%>">삭제</a></h4>
 			<%
 		}
 	%>
