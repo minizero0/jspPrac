@@ -48,8 +48,8 @@
 			</script>
 			<%
 		}else{
-			File file3 = new File(path + "/" + fname);
-			file3.delete();
+			File file2 = new File(path + "/" + fname);
+			file2.delete();
 			%>
 			<script type="text/javascript">
 				alert("수정 실패");
