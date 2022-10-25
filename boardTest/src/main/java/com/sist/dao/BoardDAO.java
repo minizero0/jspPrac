@@ -169,7 +169,7 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			String sql = "insert into board(no,writer,pwd,title,content) values(seq_board.nextval,?,?,?,?)";
+			String sql = "insert into board(no,writer,pwd,title,content,fname) values(seq_board.nextval,?,?,?,?,?)";
 			Context context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();
@@ -178,6 +178,7 @@ public class BoardDAO {
 			pstmt.setString(2, bv.getPwd());
 			pstmt.setString(3, bv.getTitle());
 			pstmt.setString(4, bv.getContent());
+			pstmt.setString(5, bv.getFname());
 			re = pstmt.executeUpdate();
 			
 		}catch (Exception e) {
@@ -221,6 +222,7 @@ public class BoardDAO {
 				bv.setContent(rs.getString("content"));
 				bv.setRegdate(rs.getDate("regdate"));
 				bv.setHit(rs.getInt("hit"));
+				bv.setFname(rs.getString("fname"));
 				list.add(bv);
 			}
 			

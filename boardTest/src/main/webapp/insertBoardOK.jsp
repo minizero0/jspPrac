@@ -1,3 +1,9 @@
+<%@page import="java.io.File"%>
+<%@page import="com.sist.dao.BoardDAO"%>
+<%@page import="com.sist.vo.BoardVO"%>
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
+<%@page import="org.apache.catalina.ant.jmx.JMXAccessorQueryTask"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,28 +13,39 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<% request.setCharacterEncoding("utf-8");%>
-	<jsp:useBean id="dao" class = "com.sist.dao.BoardDAO"/>
-	<jsp:useBean id="vo" class = "com.sist.vo.BoardVO"/>
-	<jsp:setProperty property="*" name="vo"/>
-	
 	<%
-	int re = dao.insertBoard(vo);
-	if (re > 0){
-		%>
-		<script type="text/javascript">
-			alert("등록 성공");
-			location.href = "listBoard.jsp";
-		</script>
-		 <%
-	}else{
-		%>
-		<script type="text/javascript">
-			alert("등록 실패");
-			location.href = "listBoard.jsp";
-		</script>
-		 <%
-	}
+		request.setCharacterEncoding("utf-8");
+		String path = request.getRealPath("data");
+		MultipartRequest multi = new MultipartRequest(
+										request,
+										path,
+										1024*1024*5,
+										"utf-8",
+										new DefaultFileRenamePolicy()
+									);
+	
+		BoardVO b = new BoardVO();
+		b.setWriter(multi.getParameter("writer"));
+		b.setPwd(multi.getParameter("pwd"));
+		b.setTitle(multi.getParameter("title"));
+		b.setContent(multi.getParameter("content"));
+	
+		File uploadFile =  multi.getFile("uploadFile");
+		b.setFname(uploadFile.getName());
+		
+		BoardDAO dao = new BoardDAO();		
+		
+		int re = dao.insertBoard(b);
+		if(re > 0){
+			out.print("성공");
+			%>
+			<script type="text/javascript">
+				console.log(path);
+			</script>
+		<%
+		}else{
+			out.print("실패");
+		}
 	%>
 </body>
 </html>
