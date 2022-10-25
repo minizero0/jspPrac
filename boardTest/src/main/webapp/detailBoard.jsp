@@ -33,7 +33,7 @@
 			
 			<hr>
 			<h4><a href = "updateBoard.jsp?no=<%=vo.getNo()%>">수정</a></h4>
-			<h4><a href = "#" onclick = "deleteBoard(<%=vo.getNo()%>)">삭제</a></h4>
+			<h4><a href = "deleteBoard.jsp?<%=vo.getNo()%>">삭제</a></h4>
 			<%
 		}
 	%>

@@ -46,17 +46,18 @@ public class BoardDAO {
 		}
 	}
 	
-	public int deleteBoard(int no) {
+	public int deleteBoard(int no, String pwd) {
 		int re = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			String sql = "delete board where no = ?";
+			String sql = "delete board where no = ? and pwd = ?";
 			Context context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
+			pstmt.setString(2, pwd);
 			re = pstmt.executeUpdate();
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
