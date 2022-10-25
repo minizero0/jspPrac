@@ -27,6 +27,7 @@
 		글내용 : 
 		<textarea rows="10" cols="60" name = "content"><%=bv.getContent()%></textarea><br>
 		<%
+		if(oldFname!=null){
 			if(SistUtil.isImg(oldFname)){
 				%>
 				<img alt="" src="data/<%=oldFname%>" width = "50" height = "50">
@@ -34,6 +35,7 @@
 			}else{
 				out.print("첨부파일명:" +oldFname+"<br>");
 			}
+		}
 		%>
 		
 		<input type = "file" name = "uploadFile"><br>

@@ -27,13 +27,18 @@
 									);
 	
 		BoardVO b = new BoardVO();
+		
 		b.setWriter(multi.getParameter("writer"));
 		b.setPwd(multi.getParameter("pwd"));
 		b.setTitle(multi.getParameter("title"));
 		b.setContent(multi.getParameter("content"));
-	
+		
+		String fname = "";
 		File uploadFile =  multi.getFile("uploadFile");
-		b.setFname(uploadFile.getName());
+		if(uploadFile != null){
+			fname = uploadFile.getName();
+		}
+		b.setFname(fname);
 		
 		BoardDAO dao = new BoardDAO();		
 		

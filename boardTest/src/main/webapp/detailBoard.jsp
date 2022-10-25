@@ -35,14 +35,16 @@
 			<h4>등록일 : <%=b.getRegdate() %></h4>
 			<%
 				String fname = b.getFname();
-				if(SistUtil.isImg(fname)){
-					%>
-					<img src = "data/<%=fname%>" width = "100" height = "100">
-					<%
-				}else{
-					%>
-					<h4>첨부파일 : <a href = "data/<%=vo.getFname()%>"><%=vo.getFname() %></a></h4>
-					<%					
+				if(fname != null){
+					if(SistUtil.isImg(fname)){
+						%>
+						<img src = "data/<%=fname%>" width = "100" height = "100">
+						<%
+					}else{
+						%>
+						<h4>첨부파일 : <a href = "data/<%=vo.getFname()%>"><%=vo.getFname() %></a></h4>
+						<%					
+					}
 				}
 			%>
 			
