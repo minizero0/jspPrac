@@ -18,12 +18,17 @@
 		
 		String path = request.getRealPath("data");
 		MultipartRequest multi = new MultipartRequest(request,path,1024*1024*5,"utf-8",new DefaultFileRenamePolicy());
-		String oldFname = multi.getParameter("oldFname");
+		
 		b.setNo(Integer.parseInt(multi.getParameter("no")));
 		b.setWriter(multi.getParameter("writer"));
 		b.setPwd(multi.getParameter("pwd"));
 		b.setTitle(multi.getParameter("title"));
 		b.setContent(multi.getParameter("content"));
+		
+		String oldFname = multi.getParameter("oldFname");
+		if(oldFname != null && oldFname.equals("null")){
+			oldFname = "";
+		}
 		
 		String fname = "";
 		File file =  multi.getFile("uploadFile");
@@ -32,11 +37,12 @@
 		}else{
 			fname = oldFname;
 		}
+		
 		b.setFname(fname);
 		
 		int re = dao.updateBoard(b);
 		if(re > 0){
-			if (!fname.equals("") ){
+			if (!fname.equals("") && oldFname != null && !oldFname.equals("")){
 				File file2 = new File(path + "/" + oldFname);
 				file2.delete();
 			}

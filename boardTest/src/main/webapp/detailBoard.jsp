@@ -30,7 +30,7 @@
 			<h4>글제목 : <%=b.getTitle() %></h4>
 			<h4>작성자 : <%=b.getWriter() %></h4>
 			<h4>글내용 :<br>
-			<textarea rows="10" cols="60" readonly="readonly"><%=vo.getContent() %></textarea> </h4>
+			<textarea rows="10" cols="60" readonly="readonly"><%=b.getContent() %></textarea> </h4>
 			<h4>조회수 : <%=b.getHit() %></h4>
 			<h4>등록일 : <%=b.getRegdate() %></h4>
 			<%
