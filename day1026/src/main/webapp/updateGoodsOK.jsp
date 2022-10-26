@@ -29,6 +29,7 @@
 	
 	String fname;
 	File file = multi.getFile("uploadFile");
+	
 	if(file != null){
 		fname = file.getName();
 	}else{
