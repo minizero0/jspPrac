@@ -15,6 +15,8 @@ import com.sist.vo.GoodsVO;
 
 public class GoodsDAO {
 	
+	
+	
 	public int deleteGoods(int no) {
 		int re = 0;
 		Connection conn = null;
@@ -167,13 +169,17 @@ public class GoodsDAO {
 		return re;
 	}
 	
-	public ArrayList<GoodsVO> listGoods(){
+	public ArrayList<GoodsVO> listGoods(String sortcolumn){
 		ArrayList<GoodsVO> list = new ArrayList<>();
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
+		String sql = "select * from goods";
+		if(sortcolumn!=null) {
+			sql = "select * from goods order by "+sortcolumn;
+		}
 		try {
-			String sql = "select * from goods";
+			
 			Context context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();

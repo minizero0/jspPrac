@@ -15,18 +15,27 @@
 	<table border = "1">
 		<thead>
 			<tr>
-				<th>상품번호</th>
-				<th>상품이름</th>
+				<th><a href ="listGoods.jsp?sortColumn=no">상품번호</a></th>
+				<th><a href ="listGoods.jsp?sortColumn=name">상품이름</a></th>
+				<th><a href ="listGoods.jsp?sortColumn=price">상품가격</a></th>
+				<th><a href ="listGoods.jsp?sortColumn=qty">상품수량</a></th>
 			</tr>
+			<%
+				String sortColumn = "";
+				sortColumn = request.getParameter("sortColumn");
+				
+			%>
 		</thead>
 		<tbody>
 			<%
-				ArrayList<GoodsVO> list =  dao.listGoods();
+				ArrayList<GoodsVO> list =  dao.listGoods(sortColumn);
 				for(GoodsVO gv : list){
 					%>
 					<tr>
 						<td><%=gv.getNo() %></td>
 						<td><a href = "detailGoods.jsp?no=<%=gv.getNo() %>"><%=gv.getName()%></a></td>
+						<td><%=gv.getPrice() %></td>
+						<td><%=gv.getQty() %></td>
 					</tr>
 					<%
 				}
