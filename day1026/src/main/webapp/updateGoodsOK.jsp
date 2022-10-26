@@ -38,7 +38,7 @@
 	gv.setFname(fname);
 	
 	int re = dao.updateGoods(gv);
-	if(re > 0){
+	if(re > 0){							//상품 수정에 성공!
 		if (!fname.equals("") && oldFname != null && !oldFname.equals("")){
 			File file2 = new File(path + "/" + oldFname);
 			file2.delete();
@@ -51,8 +51,7 @@
 		<%
 	}
 	else{
-		File file2 = new File(path + "/" + fname);
-		file2.delete();
+		file.delete();
 		%>
 		<script type="text/javascript">
 			alert("수정 실패");
