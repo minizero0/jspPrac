@@ -22,7 +22,6 @@
 	gv.setQty(Integer.parseInt(multi.getParameter("qty")));
 	gv.setPrice(Integer.parseInt(multi.getParameter("price")));
 	
-	
 	String fname = "";
 	File uploadFile = multi.getFile("uploadFile");
 	if(uploadFile != null){

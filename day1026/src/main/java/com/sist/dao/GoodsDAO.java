@@ -15,6 +15,75 @@ import com.sist.vo.GoodsVO;
 
 public class GoodsDAO {
 	
+	public int deleteGoods(int no) {
+		int re = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "delete goods where no = ?";
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			re = pstmt.executeUpdate();
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(pstmt!=null) {try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		
+		return re;
+	}
+	
+	public int updateGoods(GoodsVO gv) {
+		int re = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "update goods set name = ?, qty = ?, price = ?, fname = ? where no = ?";
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, gv.getName());
+			pstmt.setInt(2, gv.getQty());
+			pstmt.setInt(3, gv.getPrice());
+			pstmt.setString(4, gv.getFname());
+			pstmt.setInt(5, gv.getNo());
+			re = pstmt.executeUpdate();
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(pstmt!=null) {try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		
+		return re;
+	}
+	
+	
 	public GoodsVO findByNo(int no) {
 		GoodsVO gv = null;
 		Connection conn = null;
