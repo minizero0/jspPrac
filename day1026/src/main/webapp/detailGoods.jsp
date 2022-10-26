@@ -1,3 +1,4 @@
+<%@page import="com.sist.util.SistUtil"%>
 <%@page import="com.sist.vo.GoodsVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -16,16 +17,24 @@
 		int no = Integer.parseInt(request.getParameter("no"));
 		GoodsVO gv = dao.findByNo(no);
 		String fname = gv.getFname();
-		if(fname != null){
-			
-		}
+		
 		%>
 			<h4>상품번호 : <%= gv.getNo() %></h4>
 			<h4>상품이름 : <%= gv.getName() %></h4>
 			<h4>상품개수 : <%= gv.getQty() %></h4>
 			<h4>상품가격 : <%= gv.getPrice() %></h4>
-			<h4>상품사진 : <%= gv.getFname() %></h4>
 		<%
+		if(fname != null){
+			if(SistUtil.isImg(fname)){
+				%>
+				<img alt="" src="data/<%=fname%>" width = "200" height = "200">
+				<%
+			}else{
+				%>
+				<h4>첨부파일 : <a href = "data/<%=fname%>"><%=fname%></a></h4>
+				<%
+			}
+		}
 	}
 	%>
 </body>

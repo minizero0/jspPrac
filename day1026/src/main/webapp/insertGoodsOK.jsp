@@ -24,7 +24,7 @@
 	
 	
 	String fname = "";
-	File uploadFile = new File("uploadFile");
+	File uploadFile = multi.getFile("uploadFile");
 	if(uploadFile != null){
 		fname = uploadFile.getName();
 	}
@@ -32,9 +32,9 @@
 		
 	int re = dao.insertGoods(gv);
 	if (re > 0){
-		out.print(path);
+		response.sendRedirect("listGoods.jsp");
 	}else
-		out.print("실패");
+		out.print("Fail");
 	%>
 	
 </body>

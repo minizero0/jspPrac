@@ -33,5 +33,6 @@
 			%>
 		</tbody>
 	</table>
+	<h3><a href = "insertGoods.jsp">상품등록</a></h3>
 </body>
 </html>
