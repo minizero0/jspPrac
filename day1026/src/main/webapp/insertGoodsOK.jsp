@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:useBean id="dao" class = "com.sist.vo.GoodsDAO"/>
+	<jsp:useBean id="dao" class = "com.sist.dao.GoodsDAO"/>
 	<% 
 	request.setCharacterEncoding("utf-8"); 
 	String path = request.getRealPath("data");		

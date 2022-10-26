@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:useBean id="dao" class = "com.sist.vo.GoodsDAO"/>
+<jsp:useBean id="dao" class = "com.sist.dao.GoodsDAO"/>
 	<h2>상품목록</h2>
 	<hr>
 	<table border = "1">

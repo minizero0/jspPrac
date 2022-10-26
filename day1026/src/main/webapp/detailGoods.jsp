@@ -8,13 +8,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:useBean id="dao" class = "com.sist.vo.GoodsDAO"/>
+<jsp:useBean id="dao" class = "com.sist.dao.GoodsDAO"/>
 <h2>상품 상세</h2>
 <hr>
 	<% 
 	if(request.getParameter("no")!=null){
 		int no = Integer.parseInt(request.getParameter("no"));
 		GoodsVO gv = dao.findByNo(no);
+		String fname = gv.getFname();
+		if(fname != null){
+			
+		}
 		%>
 			<h4>상품번호 : <%= gv.getNo() %></h4>
 			<h4>상품이름 : <%= gv.getName() %></h4>
