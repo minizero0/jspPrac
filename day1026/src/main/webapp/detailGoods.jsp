@@ -27,7 +27,7 @@
 		if(fname != null){
 			if(SistUtil.isImg(fname)){
 				%>
-				<img alt="" src="data/<%=fname%>" width = "200" height = "200">
+				<img alt="" src="data/<%=fname%>" width = "200" height = "200"><br>
 				<%
 			}else{
 				%>
@@ -35,6 +35,10 @@
 				<%
 			}
 		}
+		%>
+		<button type="button" onclick="location.href='updateGoods.jsp?no=<%=gv.getNo()%>'">수정</button>
+		<button type="button" onclick="location.href='deleteGoodsOK.jsp?no=<%=gv.getNo()%>'">삭제</button>
+		<%
 	}
 	%>
 </body>
