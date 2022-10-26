@@ -7,6 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function deleteGoods(no) {
+		if(confirm("정말로 삭제하시겠어요?")){
+			location.href = "deleteGoodsOK.jsp?no="+no;
+		}
+	}
+</script>
 </head>
 <body>
 <jsp:useBean id="dao" class = "com.sist.dao.GoodsDAO"/>
@@ -37,7 +44,7 @@
 		}
 		%>
 		<button type="button" onclick="location.href='updateGoods.jsp?no=<%=gv.getNo()%>'">수정</button>
-		<button type="button" onclick="location.href='deleteGoodsOK.jsp?no=<%=gv.getNo()%>'">삭제</button>
+		<button type="button" onclick="deleteGoods(<%=gv.getNo()%>)">삭제</button>
 		<%
 	}
 	%>
