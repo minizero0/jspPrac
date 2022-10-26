@@ -14,8 +14,6 @@
 </head>
 <body>
 	<%
-		String path2 = request.getRealPath("/data/a.txt");
-		out.println(path2);
 		request.setCharacterEncoding("utf-8");
 		String path = request.getRealPath("data");
 		MultipartRequest multi = new MultipartRequest(
