@@ -12,6 +12,7 @@
 <jsp:useBean id="dao" class = "com.sist.dao.GoodsDAO"/>
 	<h2>상품목록</h2>
 	<hr>
+	<h3><a href = "insertGoods.jsp">상품등록</a></h3>
 	<table border = "1">
 		<thead>
 			<tr>
@@ -42,6 +43,10 @@
 			%>
 		</tbody>
 	</table>
-	<h3><a href = "insertGoods.jsp">상품등록</a></h3>
+	<form action="searchGoods.jsp" method = "post">
+		상품이름 : <input type = "text" name = "searchName">
+		<input type = "submit" value = "검색">
+	</form>
+	
 </body>
 </html>

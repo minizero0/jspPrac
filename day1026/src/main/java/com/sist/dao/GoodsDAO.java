@@ -15,7 +15,30 @@ import com.sist.vo.GoodsVO;
 
 public class GoodsDAO {
 	
-	
+	public ArrayList<Integer> findByName(String name) {
+		ArrayList<Integer> list = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "select * from goods where name like %?%";
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getInt("no"));
+			}
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			
+		}
+		
+		return list;
+	}
 	
 	public int deleteGoods(int no) {
 		int re = 0;
