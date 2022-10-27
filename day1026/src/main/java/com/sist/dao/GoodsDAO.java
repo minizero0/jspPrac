@@ -15,8 +15,8 @@ import com.sist.vo.GoodsVO;
 
 public class GoodsDAO {
 	
-	public ArrayList<Integer> findByName(String name) {
-		ArrayList<Integer> list = new ArrayList<>();
+	public ArrayList<GoodsVO> findByName(String name) {
+		ArrayList<GoodsVO> list = new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -29,7 +29,13 @@ public class GoodsDAO {
 			pstmt.setString(1, name);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				list.add(rs.getInt("no"));
+				GoodsVO gv = new GoodsVO();
+				gv.setNo(rs.getInt("no"));
+				gv.setName(rs.getString("name"));
+				gv.setQty(rs.getInt("qty"));
+				gv.setPrice(rs.getInt("price"));
+				gv.setFname(rs.getString("fname"));
+				list.add(gv);
 			}
 		}catch (Exception e) {
 			System.out.println(e.getMessage());

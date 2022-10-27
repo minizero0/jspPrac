@@ -13,6 +13,11 @@
 	<h2>상품목록</h2>
 	<hr>
 	<h3><a href = "insertGoods.jsp">상품등록</a></h3>
+	<form action="listGoods.jsp" method = "post">
+		상품이름 : <input type = "search" name = "searchName">
+		<input type = "submit" value = "검색">
+	</form>
+	<br>
 	<table border = "1">
 		<thead>
 			<tr>
@@ -24,6 +29,9 @@
 			<%
 				String sortColumn = "";
 				sortColumn = request.getParameter("sortColumn");
+				
+				String searchName = "";
+				searchName = request.getParameter("searchName");
 				
 			%>
 		</thead>
@@ -43,10 +51,7 @@
 			%>
 		</tbody>
 	</table>
-	<form action="searchGoods.jsp" method = "post">
-		상품이름 : <input type = "text" name = "searchName">
-		<input type = "submit" value = "검색">
-	</form>
+	
 	
 </body>
 </html>
