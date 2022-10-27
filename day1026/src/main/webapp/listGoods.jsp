@@ -75,18 +75,22 @@
 				
 				String op = "";
 				op = request.getParameter("op");
+				
+				
 			%>
 			
 		</thead>
 		<tbody>
 			<%
 			HashMap<String, String> map = new HashMap<>();
+			
 			map.put("sortColumn", sortColumn);
 			map.put("searchName", searchName);
 			map.put("cate", cate);
 			map.put("op", op);
 			
 			ArrayList<GoodsVO> list =  dao.listGoods(map);
+			session.setAttribute("map", map);
 				for(GoodsVO gv : list){
 					%>
 					<tr>
