@@ -15,6 +15,7 @@
 <body>
 	<%
 		request.setCharacterEncoding("utf-8");
+		
 		String path = request.getRealPath("data");
 		MultipartRequest multi = new MultipartRequest(
 										request,
@@ -23,11 +24,7 @@
 										"utf-8",
 										new DefaultFileRenamePolicy()
 									);
-	
 		BoardVO b = new BoardVO();
-		
-		
-		
 		
 		b.setWriter(multi.getParameter("writer"));
 		b.setPwd(multi.getParameter("pwd"));
@@ -48,6 +45,19 @@
 		int b_ref = no;
 		int b_step = 0;
 		int b_level = 0;
+		
+		int pno = Integer.parseInt(multi.getParameter("no"));
+		if(pno != 0){
+			BoardVO p = dao.findByNo(pno);
+			b_ref = p.getB_ref();
+			b_step = p.getB_step();
+			b_level = p.getB_level();
+			
+			dao.updateStep(b_ref,b_step);
+			
+			b_step++;
+			b_level++;
+		}
 		
 		b.setNo(no);
 		b.setB_ref(b_ref);

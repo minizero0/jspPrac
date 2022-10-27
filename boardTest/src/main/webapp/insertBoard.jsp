@@ -7,9 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>게시물 등록</h2>
+<%
+	int no = 0;
+	String title = "새글작성";
+	if(request.getParameter("no")!=null){
+		no = Integer.parseInt(request.getParameter("no"));
+		title = "답글작성";
+	}
+%>
+	<h2><%=title %></h2>
 	<hr>
 	<form action="insertBoardOK.jsp" method="post" enctype="multipart/form-data">
+		<input type = "hidden" name = "no" value = "<%=no %>">
 		작성자 : <input type = "text" name = "writer" required="required"><br> 
 		글암호 : <input type = "password" name = "pwd" required="required"><br>
 		글제목 : <input type = "text" name = "title" required="required"><br>

@@ -51,6 +51,7 @@
 			<hr>
 			<h4><a href = "updateBoard.jsp?no=<%=b.getNo()%>">수정</a></h4>
 			<h4><a href = "deleteBoard.jsp?no=<%=b.getNo()%>">삭제</a></h4>
+			<h4><a href = "insertBoard.jsp?no=<%=b.getNo()%>">답글작성</a></h4>
 			<%
 		}
 	%>

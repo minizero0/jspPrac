@@ -305,5 +305,34 @@ public class BoardDAO {
 		}
 		return list;
 	}
+	
+	public void updateStep(int b_ref, int b_step) {
+		String sql = "update board set b_step = b_step + 1 where b_ref = ? and b_step > ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, b_ref);
+			pstmt.setInt(2, b_step);
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(pstmt!=null) {try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+	}
 
 }
