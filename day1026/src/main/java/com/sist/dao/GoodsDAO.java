@@ -180,11 +180,17 @@ public class GoodsDAO {
 		String sql = "select * from goods";
 		
 		if(searchName!=null && !searchName.equals("")) {
-			if(cate.equals("price") || cate.equals("qty")) {
-				sql += " where "+cate+" > "+searchName+"";
-			}else {
-				sql += " where "+cate+" like '%"+searchName+"%'";
+			switch (cate) {
+			case "no": sql += " where no = "+searchName;break;
+			case "name":sql += " where name like '%"+searchName+"%'";break;
+			default: sql += " where "+cate+">="+searchName;
 			}
+			
+//			if(cate.equals("price") || cate.equals("qty")) {
+//				sql += " where "+cate+" > "+searchName+"";
+//			}else {
+//				sql += " where "+cate+" like '%"+searchName+"%'";
+//			}
 			
 		}
 		if(sortcolumn!=null && !sortcolumn.equals("")) {

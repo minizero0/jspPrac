@@ -9,6 +9,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#op{
+		visibility: hidden;
+	}
+</style>
+<script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+	function Box() {
+		var output = "";
+		output += "<select>";
+		output += "<option>상품번호</option>";
+		output += "</select>";
+		
+	}
+</script>
 </head>
 <body>
 <jsp:useBean id="dao" class = "com.sist.dao.GoodsDAO"/>
@@ -16,11 +31,18 @@
 	<hr>
 	<h3><a href = "insertGoods.jsp">상품등록</a></h3>
 	<form action="listGoods.jsp" method = "post">
-		<select name = "cate">
+		<select name = "cate" >
 			<option value = "no">상품번호</option>
 			<option value = "name">상품이름</option>
 			<option value = "price">상품가격</option>
 			<option value = "qty">상품수량</option>
+		</select>
+		<select name = "op" id = "op">
+			<option value = ">=">>=</option>
+			<option value = "<="><=</option>
+			<option value = "=">=</option>
+			<option value = ">">></option>
+			<option value = ">"><</option>
 		</select>
 		<input type = "search" name = "searchName">
 		<input type = "submit" value = "검색">
@@ -44,8 +66,8 @@
 				
 				String cate = "";
 				cate = request.getParameter("cate");
-				
 			%>
+			
 		</thead>
 		<tbody>
 			<%
