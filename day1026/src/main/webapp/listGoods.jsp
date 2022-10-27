@@ -15,7 +15,6 @@
 	<h3><a href = "insertGoods.jsp">상품등록</a></h3>
 	<form action="listGoods.jsp" method = "post">
 		<select name = "cate">
-			<option value = "*">전체</option>
 			<option value = "no">상품번호</option>
 			<option value = "name">상품이름</option>
 			<option value = "price">상품가격</option>
