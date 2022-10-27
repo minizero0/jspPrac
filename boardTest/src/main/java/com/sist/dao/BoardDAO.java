@@ -167,6 +167,47 @@ public class BoardDAO {
 		return bv;
 	}
 	
+	//새로운 글번호 발행하는 메소드
+	public int getNextNo() {
+		int no = 0;
+		String sql = "select nvl(max(no),0)+1 from board";
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				no = rs.getInt(1);
+			}
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(stmt!=null) {try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(rs!=null) {try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		return no;
+	}
 	
 	public int insertBoard(BoardVO bv) {
 		int re = 0;
@@ -174,19 +215,21 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			String sql = "insert into board(no,writer,pwd,title,content,fname,b_ref,b_step,b_level) values(seq_board.nextval,?,?,?,?,?,?,?,?)";
+			String sql = "insert into board(no,writer,pwd,title,content,fname,b_ref,b_step,b_level)"
+					+ " values(?,?,?,?,?,?,?,?,?)";
 			Context context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, bv.getWriter());
-			pstmt.setString(2, bv.getPwd());
-			pstmt.setString(3, bv.getTitle());
-			pstmt.setString(4, bv.getContent());
-			pstmt.setString(5, bv.getFname());
-			pstmt.setInt(6, bv.getB_ref());
-			pstmt.setInt(7, bv.getB_step());
-			pstmt.setInt(8, bv.getB_level());
+			pstmt.setInt(1, bv.getNo());
+			pstmt.setString(2, bv.getWriter());
+			pstmt.setString(3, bv.getPwd());
+			pstmt.setString(4, bv.getTitle());
+			pstmt.setString(5, bv.getContent());
+			pstmt.setString(6, bv.getFname());
+			pstmt.setInt(7, bv.getB_ref());
+			pstmt.setInt(8, bv.getB_step());
+			pstmt.setInt(9, bv.getB_level());
 			re = pstmt.executeUpdate();
 			
 		}catch (Exception e) {

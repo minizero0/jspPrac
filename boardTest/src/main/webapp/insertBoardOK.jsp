@@ -26,6 +26,9 @@
 	
 		BoardVO b = new BoardVO();
 		
+		
+		
+		
 		b.setWriter(multi.getParameter("writer"));
 		b.setPwd(multi.getParameter("pwd"));
 		b.setTitle(multi.getParameter("title"));
@@ -40,6 +43,17 @@
 		
 		BoardDAO dao = new BoardDAO();		
 		
+		//일단 새글 이라고 본다.
+		int no = dao.getNextNo();
+		int b_ref = no;
+		int b_step = 0;
+		int b_level = 0;
+		
+		b.setNo(no);
+		b.setB_ref(b_ref);
+		b.setB_step(b_step);
+		b.setB_level(b_level);
+		
 		int re = dao.insertBoard(b);
 		if(re > 0){
 			out.print("성공");
@@ -48,5 +62,7 @@
 			out.print("실패");
 		}
 	%>
+	
+	<a href = "listBoard.jsp">게시물 목록</a>
 </body>
 </html>
