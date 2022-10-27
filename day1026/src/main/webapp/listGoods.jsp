@@ -44,11 +44,11 @@
 			<option value = "qty">상품수량</option>
 		</select>
 		<select name = "op" id = "op">
-			<option value = ">=">>=</option>
-			<option value = "<="><=</option>
+			<option value = ">=">&gt;=</option>
+			<option value = "<=">&lt;=</option>
 			<option value = "=">=</option>
-			<option value = ">">></option>
-			<option value = "<"><</option>
+			<option value = ">">&gt;</option>
+			<option value = "<">&lt;</option>
 		</select>
 		<input type = "search" name = "searchName">
 		<input type = "submit" value = "검색">
@@ -63,26 +63,32 @@
 				<th><a href ="listGoods.jsp?sortColumn=qty">상품수량</a></th>
 			</tr>
 			<%
+				
 				request.setCharacterEncoding("utf-8");
 				String sortColumn = "";
-				sortColumn = request.getParameter("sortColumn");
-				
 				String searchName = "";
-				searchName = request.getParameter("searchName");
-				
 				String cate = "";
-				cate = request.getParameter("cate");
-				
 				String op = "";
-				op = request.getParameter("op");
+				HashMap<String, String> map = new HashMap<>();
+				if(session.getAttribute("map")!=null){
+					map = (HashMap<String,String>)session.getAttribute("map");
+					op = map.get("op");
+					searchName = map.get("searchName");
+					cate = map.get("cate");
+				}
 				
-				
+				if(request.getParameter("searchName")!=null){
+					searchName = request.getParameter("searchName");
+					cate = request.getParameter("cate");
+					op = request.getParameter("op");
+				}
+				sortColumn = request.getParameter("sortColumn");
 			%>
 			
 		</thead>
 		<tbody>
 			<%
-			HashMap<String, String> map = new HashMap<>();
+			
 			
 			map.put("sortColumn", sortColumn);
 			map.put("searchName", searchName);
@@ -90,7 +96,7 @@
 			map.put("op", op);
 			
 			ArrayList<GoodsVO> list =  dao.listGoods(map);
-			session.setAttribute("map", map);
+			session.setAttribute("map", map);	
 				for(GoodsVO gv : list){
 					%>
 					<tr>
