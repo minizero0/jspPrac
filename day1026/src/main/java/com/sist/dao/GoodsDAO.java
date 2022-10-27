@@ -172,8 +172,10 @@ public class GoodsDAO {
 	public ArrayList<GoodsVO> listGoods(HashMap<String, String> map){
 		String searchName = map.get("searchName");
 		String sortcolumn = map.get("sortColumn");
-		String cate = map.get("cate")
-;		ArrayList<GoodsVO> list = new ArrayList<>();
+		String cate = map.get("cate");		
+		String op = map.get("op");
+		
+		ArrayList<GoodsVO> list = new ArrayList<>();
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -183,7 +185,7 @@ public class GoodsDAO {
 			switch (cate) {
 			case "no": sql += " where no = "+searchName;break;
 			case "name":sql += " where name like '%"+searchName+"%'";break;
-			default: sql += " where "+cate+">="+searchName;
+			default: sql += " where "+cate+" "+op+" "+searchName;
 			}
 			
 //			if(cate.equals("price") || cate.equals("qty")) {
