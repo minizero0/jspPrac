@@ -14,7 +14,14 @@
 	<hr>
 	<h3><a href = "insertGoods.jsp">상품등록</a></h3>
 	<form action="listGoods.jsp" method = "post">
-		상품이름 : <input type = "search" name = "searchName">
+		<select name = "cate">
+			<option value = "*">전체</option>
+			<option value = "no">상품번호</option>
+			<option value = "name">상품이름</option>
+			<option value = "price">상품가격</option>
+			<option value = "qty">상품수량</option>
+		</select>
+		<input type = "search" name = "searchName">
 		<input type = "submit" value = "검색">
 	</form>
 	<br>
@@ -34,12 +41,14 @@
 				String searchName = "";
 				searchName = request.getParameter("searchName");
 				
+				String cate = "";
+				cate = request.getParameter("cate");
 				
 			%>
 		</thead>
 		<tbody>
 			<%
-				ArrayList<GoodsVO> list =  dao.listGoods(sortColumn,searchName);
+			ArrayList<GoodsVO> list =  dao.listGoods(sortColumn,searchName,cate);
 				for(GoodsVO gv : list){
 					%>
 					<tr>

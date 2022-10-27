@@ -168,14 +168,21 @@ public class GoodsDAO {
 		return re;
 	}
 	
-	public ArrayList<GoodsVO> listGoods(String sortcolumn, String searchName){
+	public ArrayList<GoodsVO> listGoods(String sortcolumn, String searchName, String cate){
 		ArrayList<GoodsVO> list = new ArrayList<>();
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		String sql = "select * from goods";
+		
+		
 		if(searchName!=null && !searchName.equals("")) {
-			sql += " where name like '%"+searchName+"%'";
+			if(cate.equals("price") || cate.equals("qty")) {
+				sql += " where "+cate+" > "+searchName+"";
+			}else {
+				sql += " where "+cate+" like '%"+searchName+"%'";
+			}
+			
 		}
 		if(sortcolumn!=null && !sortcolumn.equals("")) {
 			sql += " order by "+sortcolumn;
