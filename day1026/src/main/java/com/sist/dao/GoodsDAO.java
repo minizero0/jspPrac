@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -168,13 +169,15 @@ public class GoodsDAO {
 		return re;
 	}
 	
-	public ArrayList<GoodsVO> listGoods(String sortcolumn, String searchName, String cate){
-		ArrayList<GoodsVO> list = new ArrayList<>();
+	public ArrayList<GoodsVO> listGoods(HashMap<String, String> map){
+		String searchName = map.get("searchName");
+		String sortcolumn = map.get("sortColumn");
+		String cate = map.get("cate")
+;		ArrayList<GoodsVO> list = new ArrayList<>();
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		String sql = "select * from goods";
-		
 		
 		if(searchName!=null && !searchName.equals("")) {
 			if(cate.equals("price") || cate.equals("qty")) {

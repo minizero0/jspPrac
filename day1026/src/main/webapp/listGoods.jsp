@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="com.sist.vo.GoodsVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -47,7 +49,12 @@
 		</thead>
 		<tbody>
 			<%
-			ArrayList<GoodsVO> list =  dao.listGoods(sortColumn,searchName,cate);
+			HashMap<String, String> map = new HashMap<>();
+			map.put("sortColumn", sortColumn);
+			map.put("searchName", searchName);
+			map.put("cate", cate);
+			
+			ArrayList<GoodsVO> list =  dao.listGoods(map);
 				for(GoodsVO gv : list){
 					%>
 					<tr>
