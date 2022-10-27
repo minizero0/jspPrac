@@ -137,6 +137,9 @@ public class BoardDAO {
 				bv.setRegdate(rs.getDate("regdate"));
 				bv.setHit(rs.getInt("hit"));
 				bv.setFname(rs.getString("fname"));
+				bv.setB_ref(rs.getInt("b_ref"));
+				bv.setB_ref(rs.getInt("b_step"));
+				bv.setB_ref(rs.getInt("b_level"));
 			}
 			
 		}catch (Exception e) {
@@ -171,7 +174,7 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			String sql = "insert into board(no,writer,pwd,title,content,fname) values(seq_board.nextval,?,?,?,?,?)";
+			String sql = "insert into board(no,writer,pwd,title,content,fname,b_ref,b_step,b_level) values(seq_board.nextval,?,?,?,?,?,?,?,?)";
 			Context context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();
@@ -181,6 +184,9 @@ public class BoardDAO {
 			pstmt.setString(3, bv.getTitle());
 			pstmt.setString(4, bv.getContent());
 			pstmt.setString(5, bv.getFname());
+			pstmt.setInt(6, bv.getB_ref());
+			pstmt.setInt(7, bv.getB_step());
+			pstmt.setInt(8, bv.getB_level());
 			re = pstmt.executeUpdate();
 			
 		}catch (Exception e) {
@@ -209,7 +215,7 @@ public class BoardDAO {
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
-			String sql = "select * from board";
+			String sql = "select * from oredr by b_ref, b_step";
 			Context context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();
@@ -225,6 +231,9 @@ public class BoardDAO {
 				bv.setRegdate(rs.getDate("regdate"));
 				bv.setHit(rs.getInt("hit"));
 				bv.setFname(rs.getString("fname"));
+				bv.setB_ref(rs.getInt("b_ref"));
+				bv.setB_ref(rs.getInt("b_step"));
+				bv.setB_ref(rs.getInt("b_level"));
 				list.add(bv);
 			}
 			

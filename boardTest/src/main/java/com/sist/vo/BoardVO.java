@@ -15,4 +15,7 @@ public class BoardVO {
 	private Date regdate;
 	private int hit;
 	private String fname;
+	private int b_ref;
+	private int b_step;
+	private int b_level;
 }
