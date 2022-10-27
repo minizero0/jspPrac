@@ -15,36 +15,6 @@ import com.sist.vo.GoodsVO;
 
 public class GoodsDAO {
 	
-	public ArrayList<GoodsVO> findByName(String name) {
-		ArrayList<GoodsVO> list = new ArrayList<>();
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			String sql = "select * from goods where name like %?%";
-			Context context = new InitialContext();
-			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
-			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, name);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				GoodsVO gv = new GoodsVO();
-				gv.setNo(rs.getInt("no"));
-				gv.setName(rs.getString("name"));
-				gv.setQty(rs.getInt("qty"));
-				gv.setPrice(rs.getInt("price"));
-				gv.setFname(rs.getString("fname"));
-				list.add(gv);
-			}
-		}catch (Exception e) {
-			System.out.println(e.getMessage());
-		}finally {
-			
-		}
-		
-		return list;
-	}
 	
 	public int deleteGoods(int no) {
 		int re = 0;
@@ -198,14 +168,17 @@ public class GoodsDAO {
 		return re;
 	}
 	
-	public ArrayList<GoodsVO> listGoods(String sortcolumn){
+	public ArrayList<GoodsVO> listGoods(String sortcolumn, String searchName){
 		ArrayList<GoodsVO> list = new ArrayList<>();
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		String sql = "select * from goods";
-		if(sortcolumn!=null) {
-			sql = "select * from goods order by "+sortcolumn;
+		if(searchName!=null && !searchName.equals("")) {
+			sql += " where name like '%"+searchName+"%'";
+		}
+		if(sortcolumn!=null && !sortcolumn.equals("")) {
+			sql += " order by "+sortcolumn;
 		}
 		try {
 			

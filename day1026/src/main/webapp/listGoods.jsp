@@ -27,17 +27,19 @@
 				<th><a href ="listGoods.jsp?sortColumn=qty">상품수량</a></th>
 			</tr>
 			<%
+				request.setCharacterEncoding("utf-8");
 				String sortColumn = "";
 				sortColumn = request.getParameter("sortColumn");
 				
 				String searchName = "";
 				searchName = request.getParameter("searchName");
 				
+				
 			%>
 		</thead>
 		<tbody>
 			<%
-				ArrayList<GoodsVO> list =  dao.listGoods(sortColumn);
+				ArrayList<GoodsVO> list =  dao.listGoods(sortColumn,searchName);
 				for(GoodsVO gv : list){
 					%>
 					<tr>
@@ -51,7 +53,6 @@
 			%>
 		</tbody>
 	</table>
-	
 	
 </body>
 </html>
