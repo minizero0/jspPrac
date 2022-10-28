@@ -11,11 +11,18 @@
 <body>
 	<h2>게시물 리스트</h2>
 	<hr>
+	<%
+		int pageNUM = 1;
+		if(request.getParameter("pageNUM")!=null){
+			pageNUM = Integer.parseInt(request.getParameter("pageNUM"));
+	}
+		out.print(pageNUM);
+	%>
 	<%request.setCharacterEncoding("utf-8"); %>
 	<jsp:useBean id="dao" class = "com.sist.dao.BoardDAO"/>
 	<jsp:useBean id="vo" class = "com.sist.vo.BoardVO"/>
 	
-	<% ArrayList<BoardVO> list = dao.listBoard(); %>
+	<% ArrayList<BoardVO> list = dao.listBoard(pageNUM); %>
 	<table border = "1" width = "80%">
 	<thead>
 		<tr>
@@ -47,7 +54,16 @@
 	</table>
 	<hr>
 	<h3>총페이지 : <%= dao.countBoard() %></h3>
+	<%
+		for(int i =1;i<=dao.totalPage; i++){
+			%>
+			<a href = "listBoard.jsp?pageNUM=<%=i %>"><%= i %></a>&nbsp;
+			<%
+		}
+	%>
 	<hr>
 	<h3><a href = "insertBoard.jsp">등록</a></h3>
+	
+	
 </body>
 </html>

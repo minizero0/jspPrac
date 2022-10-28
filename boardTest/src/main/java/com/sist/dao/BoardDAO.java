@@ -302,21 +302,29 @@ public class BoardDAO {
 		return re;
 	}
 	
-	public ArrayList<BoardVO> listBoard(){
+	public ArrayList<BoardVO> listBoard(int pageNUM){
 		int cnt = countBoard();
-//		totalPage = cnt / pageSIZE;
-//		if(cnt % pageSIZE != 0 ) {
-//			totalPage++;
-//		}
+		totalPage = (int)Math.ceil((double)cnt/pageSIZE);
 		
-		totalPage = (int)Math.ceil(cnt/pageSIZE);
+		//현재페이지에 보여줘야 할 시작 레코드와 마지막 레코드를 계산하여 출력
+		int start, end;
+		
+		start = (pageNUM-1)*pageSIZE + 1;
+		end = start + pageSIZE - 1;
+		
+		if(end > cnt) {
+			end = cnt;
+		}
 		
 		ArrayList<BoardVO> list = new ArrayList<>();
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
-			String sql = "select * from board order by b_ref, b_step";
+			String sql = "select no, writer, pwd,title, content, regdate, hit, fname, b_ref, b_step, b_level "
+					+ "from (select rownum n, no, writer, pwd,title, content, regdate, hit, fname, b_ref, b_step, b_level "
+					+ "from (select * from board order by b_ref desc, b_step)) "
+					+ "where n between "+start+" and "+end+"";//b_ref, b_step
 			Context context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();
@@ -337,7 +345,6 @@ public class BoardDAO {
 				bv.setB_ref(rs.getInt("b_level"));
 				list.add(bv);
 			}
-			
 		}catch (Exception e) {
 			// TODO: handle exception
 		}finally {
