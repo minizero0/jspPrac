@@ -335,7 +335,7 @@ public class BoardDAO {
 			String sql = "select * from(select rownum n, A.* "
 					+ "from (select * from board ";
 			
-					if(keyword != null) {
+					if(keyword != null && !keyword.equals("")) {
 						sql += "where "+searchColumn+" like '%"+keyword+"%'"; 
 					}
 																				

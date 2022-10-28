@@ -37,10 +37,10 @@
 		if(request.getParameter("keyword")!=null && !request.getParameter("keyword").equals("")){
 			searchColumn = request.getParameter("searchColumn");
 			keyword = request.getParameter("keyword");
+			
 		}
 		map.put("searchColumn", searchColumn);
 		map.put("keyword", keyword);
-
 		
 		int pageNUM = 1;
 		if(request.getParameter("pageNUM")!=null){
