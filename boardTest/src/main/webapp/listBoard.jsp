@@ -28,36 +28,36 @@
 		String searchColumn = "";
 		String keyword = "";
 		
-		if(request.getParameter("keyword")!=null){
+		if(session.getAttribute("map") != null){
+			map = (HashMap<String,String>)session.getAttribute("map");
+			searchColumn = map.get("searchColumn");
+			keyword = map.get("keyword");
+		}
+		
+		if(request.getParameter("keyword")!=null && !request.getParameter("keyword").equals("")){
 			searchColumn = request.getParameter("searchColumn");
 			keyword = request.getParameter("keyword");
-			map.put("searchColumn", searchColumn);
-			map.put("keyword", keyword);
 		}
+		map.put("searchColumn", searchColumn);
+		map.put("keyword", keyword);
+
 		
 		int pageNUM = 1;
 		if(request.getParameter("pageNUM")!=null){
 			pageNUM = Integer.parseInt(request.getParameter("pageNUM"));
 	}
 		out.print(pageNUM);
+			
+
 		
-		
-		if(session.getAttribute("map")!=null){
-			map = (HashMap<String,String>)session.getAttribute("map");
-			searchColumn = map.get("searchColumn");
-			keyword = map.get("keyword");
-		}
-		
-		if(request.getParameter("searchColumn")!=null){
-			searchColumn = request.getParameter("searchColumn");
-			keyword = request.getParameter("keyword");
-		}
 	%>
-	<%request.setCharacterEncoding("utf-8"); %>
 	<jsp:useBean id="dao" class = "com.sist.dao.BoardDAO"/>
 	<jsp:useBean id="vo" class = "com.sist.vo.BoardVO"/>
 	
-	<% ArrayList<BoardVO> list = dao.listBoard(pageNUM, map); %>
+	<% 
+	ArrayList<BoardVO> list = dao.listBoard(pageNUM, map);
+	session.setAttribute("map", map);
+		%>
 	<table border = "1" width = "80%">
 	<thead>
 		<tr>
