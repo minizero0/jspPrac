@@ -52,9 +52,7 @@
 			b_ref = p.getB_ref();
 			b_step = p.getB_step();
 			b_level = p.getB_level();
-			
 			dao.updateStep(b_ref,b_step);
-			
 			b_step++;
 			b_level++;
 		}
@@ -67,7 +65,6 @@
 		int re = dao.insertBoard(b);
 		if(re > 0){
 			out.print("성공");
-			out.print(path);
 		}else{
 			out.print("실패");
 		}

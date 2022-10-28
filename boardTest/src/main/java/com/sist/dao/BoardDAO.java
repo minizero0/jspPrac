@@ -15,6 +15,49 @@ import com.sist.vo.BoardVO;
 
 public class BoardDAO {
 	
+	public int countBoard() {
+		int re = 0;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select count(no) from board";
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				re = rs.getInt(1);
+			}
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(stmt!=null) {try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(rs!=null) {try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		
+		return re;
+	}
+	
 	public void plusHit(int no) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -138,8 +181,8 @@ public class BoardDAO {
 				bv.setHit(rs.getInt("hit"));
 				bv.setFname(rs.getString("fname"));
 				bv.setB_ref(rs.getInt("b_ref"));
-				bv.setB_ref(rs.getInt("b_step"));
-				bv.setB_ref(rs.getInt("b_level"));
+				bv.setB_step(rs.getInt("b_step"));
+				bv.setB_level(rs.getInt("b_level"));
 			}
 			
 		}catch (Exception e) {
@@ -253,12 +296,18 @@ public class BoardDAO {
 	}
 	
 	public ArrayList<BoardVO> listBoard(){
+		int cnt = countBoard();
+		totalPage = cnt / pageSIZE;
+		if(cnt % pageSIZE != 0 ) {
+			totalPage++;
+		}
+		
 		ArrayList<BoardVO> list = new ArrayList<>();
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
-			String sql = "select * from oredr by b_ref, b_step";
+			String sql = "select * from board order by b_ref, b_step";
 			Context context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();
@@ -317,6 +366,7 @@ public class BoardDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, b_ref);
 			pstmt.setInt(2, b_step);
+			pstmt.executeUpdate();
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}finally {

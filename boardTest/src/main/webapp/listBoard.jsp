@@ -16,7 +16,7 @@
 	<jsp:useBean id="vo" class = "com.sist.vo.BoardVO"/>
 	
 	<% ArrayList<BoardVO> list = dao.listBoard(); %>
-	<table border = "1">
+	<table border = "1" width = "80%">
 	<thead>
 		<tr>
 			<th>NO</th>
@@ -30,7 +30,13 @@
 				%>
 				<tr>
 					<td><%=bv.getNo()%></td>
-					<td><a href = "detailBoard.jsp?no=<%=bv.getNo()%>"><%=bv.getWriter()%></a></td>
+					<td>
+						<%
+								for(int i=1; i<=bv.getB_level(); i++ ){
+									out.print("&nbsp;&nbsp;");
+								}
+							%>
+					<a href = "detailBoard.jsp?no=<%=bv.getNo()%>"><%=bv.getWriter()%></a></td>
 					<td><%=bv.getTitle()%></td>
 					
 				</tr>
@@ -39,6 +45,8 @@
 		%>
 	</tbody>
 	</table>
+	<hr>
+	<h3>총페이지 : <%= dao.countBoard() %></h3>
 	<hr>
 	<h3><a href = "insertBoard.jsp">등록</a></h3>
 </body>
