@@ -11,6 +11,16 @@
 <body>
 	<h2>게시물 리스트</h2>
 	<hr>
+	
+	<form action="listBoard.jsp" method = "post">
+		<select name = "cate">
+			<option value = "writer">작성자</option>
+			<option value = "title">제목</option>
+			<option value = "content">글내용</option>
+		</select>
+		<input type = "search" name = "keyword">
+		<input type = "submit" value = "검색">
+	</form>
 	<%
 		int pageNUM = 1;
 		if(request.getParameter("pageNUM")!=null){

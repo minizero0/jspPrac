@@ -321,10 +321,12 @@ public class BoardDAO {
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
-			String sql = "select no, writer, pwd,title, content, regdate, hit, fname, b_ref, b_step, b_level "
-					+ "from (select rownum n, no, writer, pwd,title, content, regdate, hit, fname, b_ref, b_step, b_level "
-					+ "from (select * from board order by b_ref desc, b_step)) "
-					+ "where n between "+start+" and "+end+"";//b_ref, b_step
+			String sql = "select * from(select rownum n, A.* from (select * from board order by b_ref desc, b_step) A) where n between "+start+" and "+end+"";
+			
+//			String sql = "select no, writer, pwd,title, content, regdate, hit, fname, b_ref, b_step, b_level "
+//					+ "from (select rownum n, no, writer, pwd,title, content, regdate, hit, fname, b_ref, b_step, b_level "
+//					+ "from (select * from board order by b_ref desc, b_step)) "
+//					+ "where n between "+start+" and "+end+"";//b_ref, b_step
 			Context context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();
