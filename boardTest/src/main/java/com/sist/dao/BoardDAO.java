@@ -14,6 +14,14 @@ import javax.sql.DataSource;
 import com.sist.vo.BoardVO;
 
 public class BoardDAO {
+		//한 화면에 보여줄 레코드의 수
+		public static int pageSIZE = 10;
+		
+		//전체 레코드 수
+		public static int totalRecord = 0;
+		
+		//전체 페이지 수 
+		public static int totalPage = 0;
 	
 	public int countBoard() {
 		int re = 0;
@@ -291,16 +299,17 @@ public class BoardDAO {
 				e.printStackTrace();
 			}}
 		}
-		
 		return re;
 	}
 	
 	public ArrayList<BoardVO> listBoard(){
 		int cnt = countBoard();
-		totalPage = cnt / pageSIZE;
-		if(cnt % pageSIZE != 0 ) {
-			totalPage++;
-		}
+//		totalPage = cnt / pageSIZE;
+//		if(cnt % pageSIZE != 0 ) {
+//			totalPage++;
+//		}
+		
+		totalPage = (int)Math.ceil(cnt/pageSIZE);
 		
 		ArrayList<BoardVO> list = new ArrayList<>();
 		Connection conn = null;
