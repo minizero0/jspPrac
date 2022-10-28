@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="com.sist.vo.BoardVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -13,7 +14,7 @@
 	<hr>
 	
 	<form action="listBoard.jsp" method = "post">
-		<select name = "cate">
+		<select name = "searchColumn">
 			<option value = "writer">작성자</option>
 			<option value = "title">제목</option>
 			<option value = "content">글내용</option>
@@ -22,17 +23,41 @@
 		<input type = "submit" value = "검색">
 	</form>
 	<%
+		request.setCharacterEncoding("utf-8");
+		HashMap<String,String> map = new HashMap<>();
+		String searchColumn = "";
+		String keyword = "";
+		
+		if(request.getParameter("keyword")!=null){
+			searchColumn = request.getParameter("searchColumn");
+			keyword = request.getParameter("keyword");
+			map.put("searchColumn", searchColumn);
+			map.put("keyword", keyword);
+		}
+		
 		int pageNUM = 1;
 		if(request.getParameter("pageNUM")!=null){
 			pageNUM = Integer.parseInt(request.getParameter("pageNUM"));
 	}
 		out.print(pageNUM);
+		
+		
+		if(session.getAttribute("map")!=null){
+			map = (HashMap<String,String>)session.getAttribute("map");
+			searchColumn = map.get("searchColumn");
+			keyword = map.get("keyword");
+		}
+		
+		if(request.getParameter("searchColumn")!=null){
+			searchColumn = request.getParameter("searchColumn");
+			keyword = request.getParameter("keyword");
+		}
 	%>
 	<%request.setCharacterEncoding("utf-8"); %>
 	<jsp:useBean id="dao" class = "com.sist.dao.BoardDAO"/>
 	<jsp:useBean id="vo" class = "com.sist.vo.BoardVO"/>
 	
-	<% ArrayList<BoardVO> list = dao.listBoard(pageNUM); %>
+	<% ArrayList<BoardVO> list = dao.listBoard(pageNUM, map); %>
 	<table border = "1" width = "80%">
 	<thead>
 		<tr>
@@ -63,7 +88,7 @@
 	</tbody>
 	</table>
 	<hr>
-	<h3>총페이지 : <%= dao.countBoard() %></h3>
+	<h3>총페이지 : <%= dao.countBoard(map) %></h3>
 	<%
 		for(int i =1;i<=dao.totalPage; i++){
 			%>

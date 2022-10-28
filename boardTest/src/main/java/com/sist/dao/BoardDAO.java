@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -23,14 +24,19 @@ public class BoardDAO {
 		//전체 페이지 수 
 		public static int totalPage = 0;
 	
-	public int countBoard() {
+	public int countBoard(HashMap<String, String> map) {
 		int re = 0;
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
+		String searchColumn = map.get("searchColumn");
+		String keyword = map.get("keyword");
 		
 		try {
-			String sql = "select count(no) from board";
+			String sql = "select count(*) from board";
+			if(keyword !=null) {
+				sql += " where "+searchColumn+" like '%"+keyword+"%'";
+			}
 			Context context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();
@@ -302,9 +308,14 @@ public class BoardDAO {
 		return re;
 	}
 	
-	public ArrayList<BoardVO> listBoard(int pageNUM){
-		int cnt = countBoard();
+	public ArrayList<BoardVO> listBoard(int pageNUM, HashMap<String, String> map){
+		int cnt = countBoard(map);
 		totalPage = (int)Math.ceil((double)cnt/pageSIZE);
+		String searchColumn = map.get("searchColumn");
+		String keyword = map.get("keyword");
+		
+		System.out.println(keyword);
+		System.out.println(searchColumn);
 		
 		//현재페이지에 보여줘야 할 시작 레코드와 마지막 레코드를 계산하여 출력
 		int start, end;
@@ -321,7 +332,19 @@ public class BoardDAO {
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
-			String sql = "select * from(select rownum n, A.* from (select * from board order by b_ref desc, b_step) A) where n between "+start+" and "+end+"";
+			String sql = "select * from(select rownum n, A.* "
+					+ "from (select * from board ";
+			
+					if(keyword != null) {
+						sql += "where "+searchColumn+" like '%"+keyword+"%'"; 
+					}
+																				
+					sql += "order by b_ref desc, b_step) A) "
+					+ "where n between "+start+" and "+end+"";
+			
+//					if(keyword != null) {
+//						sql += " and "+searchColumn+" like '%"+keyword+"%'"; 
+//					}
 			
 //			String sql = "select no, writer, pwd,title, content, regdate, hit, fname, b_ref, b_step, b_level "
 //					+ "from (select rownum n, no, writer, pwd,title, content, regdate, hit, fname, b_ref, b_step, b_level "
