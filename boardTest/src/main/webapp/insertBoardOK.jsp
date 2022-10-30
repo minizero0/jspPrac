@@ -16,6 +16,7 @@
 	<%
 		request.setCharacterEncoding("utf-8");
 		
+	
 		String path = request.getRealPath("data");
 		MultipartRequest multi = new MultipartRequest(
 										request,
