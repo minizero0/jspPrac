@@ -30,7 +30,7 @@
 		<c:forEach var = "b" items = "${list }">
 			<tr>
 				<td>${b.no }</td>
-				<td>${b.title }</td>
+				<td><a href = "detailBoard.do?no=${b.no}">${b.title }</a></td>
 				<td>${b.writer }</td>
 				<td>${b.hit }</td>
 				<td>${b.regdate }</td>

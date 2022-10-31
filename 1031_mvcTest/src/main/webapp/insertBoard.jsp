@@ -9,7 +9,8 @@
 <body>
 	<h2>게시물 등록</h2>
 	<hr>
-	<form action="insertBoard.do" method="post" enctype="multipart/form-data">
+	<form action="insertBoardOK.do" method="post" enctype="multipart/form-data">
+		<input type = "hidden" name = "no" value = "${no }">
 		작성자 : <input type = "text" name = "writer" required="required"><br> 
 		글암호 : <input type = "password" name = "pwd" required="required"><br>
 		글제목 : <input type = "text" name = "title" required="required"><br>

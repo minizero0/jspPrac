@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sist.action.DetailBoardAction;
 import com.sist.action.ListBoardAction;
 import com.sist.action.SistAction;
 import com.sist.action.insertBoardAction;
+import com.sist.action.insertBoardOKAction;
 
 /**
  * Servlet implementation class SistController
@@ -38,13 +40,17 @@ public class SistController extends HttpServlet {
 		String cmd = uri.substring(uri.lastIndexOf("/")+1);
 		System.out.println(cmd);
 		
-		SistAction action;
+		SistAction action = null;
 		String view = "";
 		
 		if(cmd.equals("listBoard.do")) {
 			action = new ListBoardAction();
-		}else {
+		}else if(cmd.equals("insertBoard.do")){
 			action = new insertBoardAction();
+		}else if(cmd.equals("insertBoardOK.do")){
+			action = new insertBoardOKAction();
+		}else if(cmd.equals("detailBoard.do")) {
+			action = new DetailBoardAction();
 		}
 		
 		view = action.pro(request, response);
