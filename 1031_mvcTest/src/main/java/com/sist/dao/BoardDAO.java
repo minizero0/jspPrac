@@ -290,6 +290,7 @@ public class BoardDAO {
 				b.setTitle(rs.getString("title"));
 				b.setContent(rs.getString("content"));
 				b.setRegdate(rs.getDate("regdate"));
+				b.setHit(rs.getInt("hit"));
 				b.setB_ref(rs.getInt("b_ref"));
 				b.setB_step(rs.getInt("b_step"));
 				b.setB_level(rs.getInt("b_level"));

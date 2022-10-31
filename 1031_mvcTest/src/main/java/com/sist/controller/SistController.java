@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.sist.action.DetailBoardAction;
 import com.sist.action.ListBoardAction;
 import com.sist.action.SistAction;
+import com.sist.action.UpdateBoardAction;
+import com.sist.action.UpdateBoardOKAction;
 import com.sist.action.insertBoardAction;
 import com.sist.action.insertBoardOKAction;
 
@@ -51,6 +53,10 @@ public class SistController extends HttpServlet {
 			action = new insertBoardOKAction();
 		}else if(cmd.equals("detailBoard.do")) {
 			action = new DetailBoardAction();
+		}else if(cmd.equals("updateBoard.do")) {
+			action = new UpdateBoardAction();
+		}else if(cmd.equals("updateBoardOK.do")) {
+			action = new UpdateBoardOKAction();
 		}
 		
 		view = action.pro(request, response);

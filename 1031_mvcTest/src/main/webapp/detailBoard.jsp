@@ -19,7 +19,7 @@
 		<h4>등록일 : ${b.regdate }</h4>
 		
 		<hr>
-		<h4><a href = "updateBoard.jsp?no=${b.no }">수정</a></h4>
+		<h4><a href = "updateBoard.do?no=${b.no }">수정</a></h4>
 		<h4><a href = "deleteBoard.jsp?no=${b.no }">삭제</a></h4>
 		<h4><a href = "insertBoard.do?no=${b.no }">답글작성</a></h4>
 	
