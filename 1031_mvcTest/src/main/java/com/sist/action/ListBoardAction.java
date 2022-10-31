@@ -20,13 +20,13 @@ public class ListBoardAction implements SistAction{
 		int pageNUM = 1;
 		String searchColumn = "";
 		String keyword = "";
+		if(request.getParameter("pageNUM") != null) {
+			pageNUM = Integer.parseInt(request.getParameter("pageNUM"));	
+		}
 		
-		HashMap<String, String> map = new HashMap<>();
-		map.put("keyword", keyword);
-		map.put("searchColumn", searchColumn);
-		
-		ArrayList<BoardVO> list = dao.listBoard(pageNUM, map);
+		ArrayList<BoardVO> list = dao.findAll(pageNUM, searchColumn, keyword);
 		request.setAttribute("list", list);
+		request.setAttribute("totalPage", dao.totalPage);
 		
 		
 		return "listBoard.jsp";
