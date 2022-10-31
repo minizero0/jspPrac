@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sist.action.DeleteBoardAction;
+import com.sist.action.DeleteBoardOKAction;
 import com.sist.action.DetailBoardAction;
 import com.sist.action.ListBoardAction;
 import com.sist.action.SistAction;
@@ -57,6 +59,10 @@ public class SistController extends HttpServlet {
 			action = new UpdateBoardAction();
 		}else if(cmd.equals("updateBoardOK.do")) {
 			action = new UpdateBoardOKAction();
+		}else if(cmd.equals("deleteBoard.do")) {
+			action = new DeleteBoardAction();
+		}else if(cmd.equals("deleteBoardOK.do")) {
+			action = new DeleteBoardOKAction();
 		}
 		
 		view = action.pro(request, response);
