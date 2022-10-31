@@ -28,7 +28,8 @@ public class UpdateBoardOKAction implements SistAction{
 		b.setContent(multi.getParameter("content"));
 		
 		String oldFname = multi.getParameter("oldFname");
-		if(oldFname != null && oldFname.equals("null")){
+		
+		if(oldFname == null || oldFname.equals("null")){
 			oldFname = "";
 		}
 		

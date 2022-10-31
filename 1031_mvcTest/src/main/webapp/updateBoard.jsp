@@ -16,7 +16,7 @@
 		글제목 : <input type = "text" name = "title" required="required" value = "${b.title }"><br>
 		글내용 : 
 		<textarea rows="10" cols="60" name = "content" required="required">${b.content }</textarea><br>
-		첨부파일 : <input type = "file" name = "uploadFile"><br>
+		첨부파일 : <input type = "file" name = "uploadFile" value = "${b.fname }"><br>
 		<input type = "submit" value = "등록">
 		<input type = "reset" value = "취소">
 	</form>
