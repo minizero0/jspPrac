@@ -1,6 +1,7 @@
 package com.sist.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,11 +25,28 @@ import com.sist.action.insertBoardOKAction;
  */
 @WebServlet("*.do")
 public class SistController extends HttpServlet {
+	HashMap<String, SistAction> map = new HashMap<>();
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
+	@Override
+	public void init() throws ServletException {
+		
+		
+		map.put("listBoard.do", new ListBoardAction());
+		map.put("insertBoard.do", new insertBoardAction());
+		map.put("insertBoardOK.do", new insertBoardOKAction());
+		map.put("detailBoard.do", new DetailBoardAction());
+		map.put("updateBoard.do", new UpdateBoardAction());
+		map.put("updateBoardOK.do", new DeleteBoardAction());
+		map.put("deleteBoard.do", new UpdateBoardOKAction());
+		map.put("deleteBoardOK.do", new DeleteBoardOKAction());
+		
+		
+		super.init();
+	}
     public SistController() {
         super();
         // TODO Auto-generated constructor stub
@@ -39,31 +57,14 @@ public class SistController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
-		System.out.println("uri:"+uri);
-		
 		String cmd = uri.substring(uri.lastIndexOf("/")+1);
 		System.out.println(cmd);
 		
 		SistAction action = null;
 		String view = "";
 		
-		if(cmd.equals("listBoard.do")) {
-			action = new ListBoardAction();
-		}else if(cmd.equals("insertBoard.do")){
-			action = new insertBoardAction();
-		}else if(cmd.equals("insertBoardOK.do")){
-			action = new insertBoardOKAction();
-		}else if(cmd.equals("detailBoard.do")) {
-			action = new DetailBoardAction();
-		}else if(cmd.equals("updateBoard.do")) {
-			action = new UpdateBoardAction();
-		}else if(cmd.equals("updateBoardOK.do")) {
-			action = new UpdateBoardOKAction();
-		}else if(cmd.equals("deleteBoard.do")) {
-			action = new DeleteBoardAction();
-		}else if(cmd.equals("deleteBoardOK.do")) {
-			action = new DeleteBoardOKAction();
-		}
+		action = map.get(cmd);
+		
 		
 		view = action.pro(request, response);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
