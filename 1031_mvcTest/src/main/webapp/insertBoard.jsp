@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>게시물 등록</h2>
+	<h2>${title }</h2>
 	<hr>
 	<form action="insertBoardOK.do" method="post" enctype="multipart/form-data">
 		<input type = "hidden" name = "no" value = "${no }">

@@ -13,11 +13,12 @@ import com.sist.vo.BoardVO;
 public class DetailBoardAction implements SistAction{
 	@Override
 	public String pro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-BoardDAO dao = new BoardDAO();
+		BoardDAO dao = new BoardDAO();
 		
 		int no = Integer.parseInt(request.getParameter("no"));
-		BoardVO bv = dao.findByNo(no);
-		request.setAttribute("bv", bv);
+		BoardVO b = dao.findByNo(no);
+		dao.updateHit(no);
+		request.setAttribute("b", b);
 		
 		
 		return "detailBoard.jsp";

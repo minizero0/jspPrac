@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h2>게시물 목록</h2>
+	<a href = "insertBoard.do">등록</a>
 	<form action="listBoard.do">
 		<select name = "searchColumn">
 			<option value = "writer">작성자</option>
