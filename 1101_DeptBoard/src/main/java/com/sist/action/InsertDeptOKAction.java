@@ -12,7 +12,6 @@ import com.sist.vo.DeptVO;
 public class InsertDeptOKAction implements SistAction{
 	@Override
 	public String pro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
 		DeptDAO dao = new DeptDAO();
 		DeptVO dv = new DeptVO();
 		
