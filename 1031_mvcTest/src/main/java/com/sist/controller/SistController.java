@@ -1,9 +1,13 @@
 package com.sist.controller;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,26 +35,25 @@ public class SistController extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
+	
 	@Override
-	public void init() throws ServletException {
+	public void init(ServletConfig config) throws ServletException {
+		String path = config.getServletContext().getRealPath("WEB-INF");
+		try {
+			FileReader fr = new FileReader(path + "/sist.properties");			//properties에 있는 명령어를 가져옴
+			Properties prop = new Properties();
+			prop.load(fr);
+			Iterator iter= prop.keySet().iterator();
+			
+			while(iter.hasNext()) {
+				String key = (String)iter.next();
+			}
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		
 		
-		map.put("listBoard.do", new ListBoardAction());
-		map.put("insertBoard.do", new insertBoardAction());
-		map.put("insertBoardOK.do", new insertBoardOKAction());
-		map.put("detailBoard.do", new DetailBoardAction());
-		map.put("updateBoard.do", new UpdateBoardAction());
-		map.put("updateBoardOK.do", new UpdateBoardOKAction());
-		map.put("deleteBoard.do", new DeleteBoardAction());
-		map.put("deleteBoardOK.do", new DeleteBoardOKAction());
-		
-		
-		super.init();
 	}
-    public SistController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
