@@ -12,7 +12,7 @@ import com.sist.vo.DeptVO;
 public class InsertDeptOKAction implements SistAction{
 	@Override
 	public String pro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DeptDAO dao = new DeptDAO();
+		DeptDAO dao = DeptDAO.getInstance();
 		DeptVO dv = new DeptVO();
 		
 		int no = Integer.parseInt(request.getParameter("dno"));

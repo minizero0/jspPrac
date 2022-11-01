@@ -15,7 +15,20 @@ import com.sist.vo.DeptVO;
 
 public class DeptDAO {
 	
+	private static DeptDAO dao;
+	
+	public static DeptDAO getInstance() {		//singleton 생성방식
+		if(dao == null)
+			dao = new DeptDAO();
+		return dao;
+	}
+	
+	private DeptDAO() {
+		
+	}
+	
 	public int deleteDept(int no) {
+		
 		int re = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;

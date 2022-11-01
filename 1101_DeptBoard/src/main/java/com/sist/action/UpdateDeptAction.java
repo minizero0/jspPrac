@@ -12,8 +12,7 @@ import com.sist.vo.DeptVO;
 public class UpdateDeptAction implements SistAction{
 	@Override
 	public String pro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DeptDAO dao = new DeptDAO();
-		
+		DeptDAO dao = DeptDAO.getInstance();
 		int no = Integer.parseInt(request.getParameter("no"));
 		DeptVO dv = dao.findByNo(no);
 		request.setAttribute("dv", dv);

@@ -10,7 +10,6 @@
 		if(confirm("정말로 삭제하시겠어요?")){
 			location.href = "deleteDeptOK.do?no="+dno;
 		}
-		
 	}
 
 </script>

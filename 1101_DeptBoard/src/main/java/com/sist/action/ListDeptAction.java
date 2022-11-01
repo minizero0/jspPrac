@@ -13,7 +13,7 @@ import com.sist.vo.DeptVO;
 public class ListDeptAction implements SistAction{
 	@Override
 	public String pro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DeptDAO dao = new DeptDAO();
+		DeptDAO dao = DeptDAO.getInstance();
 		
 		ArrayList<DeptVO> list = dao.findAll();
 		request.setAttribute("list", list);

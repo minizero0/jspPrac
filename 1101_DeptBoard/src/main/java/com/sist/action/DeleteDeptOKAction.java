@@ -11,7 +11,7 @@ import com.sist.dao.DeptDAO;
 public class DeleteDeptOKAction implements SistAction{
 	@Override
 	public String pro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DeptDAO dao = new DeptDAO();
+		DeptDAO dao = DeptDAO.getInstance();
 		
 		int no = Integer.parseInt(request.getParameter("no"));
 		int re = dao.deleteDept(no);
