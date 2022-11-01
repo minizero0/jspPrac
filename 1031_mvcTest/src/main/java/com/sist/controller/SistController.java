@@ -40,8 +40,8 @@ public class SistController extends HttpServlet {
 		map.put("insertBoardOK.do", new insertBoardOKAction());
 		map.put("detailBoard.do", new DetailBoardAction());
 		map.put("updateBoard.do", new UpdateBoardAction());
-		map.put("updateBoardOK.do", new DeleteBoardAction());
-		map.put("deleteBoard.do", new UpdateBoardOKAction());
+		map.put("updateBoardOK.do", new UpdateBoardOKAction());
+		map.put("deleteBoard.do", new DeleteBoardAction());
 		map.put("deleteBoardOK.do", new DeleteBoardOKAction());
 		
 		
