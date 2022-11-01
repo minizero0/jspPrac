@@ -29,7 +29,7 @@ import com.sist.action.insertBoardOKAction;
  */
 @WebServlet("*.do")
 public class SistController extends HttpServlet {
-	HashMap<String, SistAction> map = new HashMap<>();
+	HashMap<String, SistAction> map;
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -38,6 +38,7 @@ public class SistController extends HttpServlet {
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
+		map = new HashMap<String, SistAction>();
 		String path = config.getServletContext().getRealPath("WEB-INF");
 		try {
 			FileReader fr = new FileReader(path + "/sist.properties");			//properties에 있는 명령어를 가져옴
@@ -46,13 +47,13 @@ public class SistController extends HttpServlet {
 			Iterator iter= prop.keySet().iterator();
 			
 			while(iter.hasNext()) {
-				String key = (String)iter.next();
+				String cmd = (String)iter.next();
+				String clsName = (String)prop.get(cmd);
+				map.put(cmd, (SistAction)Class.forName(clsName).newInstance());
 			}
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		
 	}
 
 	/**
