@@ -20,7 +20,7 @@
 		<c:forEach items = "${list }" var = "bv">
 			<tr>
 				<td>${bv.dno }</td>
-				<td>${bv.dname }</td>
+				<td><a href = "detailDept.do?no=${bv.dno}">${bv.dname }</td>
 				<td>${bv.dloc }</td>		
 			</tr>
 		</c:forEach>
