@@ -15,27 +15,18 @@ import com.sist.vo.DeptVO;
 
 public class DeptDAO {
 	
-	public int updateDept(DeptVO dv) {
+	public int deleteDept(int no) {
 		int re = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = "update dept set dno = ?, dname = ?, dloc = ?";
+		String sql = "delete dept where dno = ?";
 		try {
 			Context context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, dv.getDno());
-			pstmt.setString(2, dv.getDname());
-			pstmt.setString(3, dv.getDloc());
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				dv = new DeptVO();
-				dv.setDno(rs.getInt("dno"));
-				dv.setDname(rs.getString("dname"));
-				dv.setDloc(rs.getString("dloc"));
-			}
+			pstmt.setInt(1, no);
+			re = pstmt.executeUpdate();
 			
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -52,8 +43,37 @@ public class DeptDAO {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}}
-			if(rs!=null) {try {
-				rs.close();
+		}
+		
+		return re;
+	}
+	
+	public int updateDept(DeptVO dv) {
+		int re = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update dept set dname = ?, dloc = ? where dno = ?";
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dv.getDname());
+			pstmt.setString(2, dv.getDloc());
+			pstmt.setInt(3, dv.getDno());
+			re = pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(pstmt!=null) {try {
+				pstmt.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

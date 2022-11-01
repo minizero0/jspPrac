@@ -12,6 +12,10 @@
 	<h4>부서번호 : ${dv.dno }</h4>
 	<h4>부서이름 : ${dv.dname }</h4>
 	<h4>부서위치 : ${dv.dloc }</h4>
+	<hr>
+	<a href = "updateDept.do?no=${dv.dno }">수정하기</a><br>
+	<a href = "deleteDeptOK.do?no=${dv.dno }">삭제하기</a><br>
+	<hr>
 	<a href = "listDept.do">게시물 목록</a>
 </body>
 </html>
