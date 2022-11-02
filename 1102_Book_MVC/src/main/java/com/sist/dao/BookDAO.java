@@ -41,7 +41,7 @@ public class BookDAO {
 			pstmt.setString(2, bv.getPublisher());
 			pstmt.setInt(3, bv.getPrice());
 			pstmt.setInt(4, bv.getBookid());
-			re = pstmt.executeUpdate();
+			re = pstmt.executeUpdate(); 
 			
 		}catch (Exception e) {
 			System.out.println(e.getMessage());

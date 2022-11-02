@@ -24,6 +24,9 @@ public class UpdateBookOKAction implements SistAction{
 		bv.setPublisher(publisher);
 		bv.setPrice(price);
 		
+		int re = dao.updateBook(bv);
+		request.setAttribute("re", re);
+		
 		return "updateBookOK.jsp";
 	}
 }
