@@ -27,6 +27,45 @@ public class BookDAO {
 		
 	}
 	
+	public int insertBook(BookVO bv) {
+		
+		int re = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "insert into book values(?,?,?,?)";
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bv.getBookid());
+			pstmt.setString(2, bv.getBookname());
+			pstmt.setString(3, bv.getPublisher());
+			pstmt.setInt(4, bv.getPrice());
+			re = pstmt.executeUpdate(); 
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(pstmt!=null) {try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		
+		
+		return re;
+	}
+	
+	
 	public int updateBook(BookVO bv) {
 		int re = 0;
 		Connection conn = null;

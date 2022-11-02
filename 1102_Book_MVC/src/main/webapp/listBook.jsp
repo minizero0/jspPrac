@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h4><a href = "insertBook.do">게시물등록</a></h4>
 	<table border = "1" width = "50%">
 		<tr>
 			<td>bookid</td>
