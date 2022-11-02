@@ -25,7 +25,11 @@ public class UpdateBookOKAction implements SistAction{
 		bv.setPrice(price);
 		
 		int re = dao.updateBook(bv);
-		request.setAttribute("re", re);
+		String msg = "도서 수정에 성공하였습니다.";
+		if(re <= 0) {
+			msg = "도서 수정에 실패하였습니다.";
+		}
+		request.setAttribute("msg", msg);
 		
 		return "updateBookOK.jsp";
 	}
