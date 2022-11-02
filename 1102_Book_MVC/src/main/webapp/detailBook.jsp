@@ -14,6 +14,8 @@
 	<h4>출판사 : ${bv.publisher }</h4>
 	<h4>도서가격 : ${bv.price }</h4>
 	<hr>
+	<a href = "updateBook.do?bookid=${bv.bookid }">게시물 수정</a>
+	<hr>
 	<a href = "listBook.do">게시물 목록</a>
 </body>
 </html>
