@@ -12,7 +12,6 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.sist.vo.BookVO;
-import com.sist.vo.DeptVO;
 
 public class BookDAO {
 	private static BookDAO dao;
@@ -26,6 +25,43 @@ public class BookDAO {
 	
 	private BookDAO() {
 		
+	}
+	
+	public int updateBook(BookVO bv) {
+		int re = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update book set bookname = ?, publisher = ?, price = ? where bookid = ?";
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bv.getBookname());
+			pstmt.setString(2, bv.getPublisher());
+			pstmt.setInt(3, bv.getPrice());
+			pstmt.setInt(4, bv.getBookid());
+			re = pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(pstmt!=null) {try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		
+		
+		return re;
 	}
 	
 	public BookVO findByBookid(int bookid) {
@@ -72,7 +108,7 @@ public class BookDAO {
 			}}
 		}
 		
-		return dv;
+		return bv;
 	}
 	
 	
