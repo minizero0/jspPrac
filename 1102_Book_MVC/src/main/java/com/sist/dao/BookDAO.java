@@ -43,7 +43,7 @@ public class BookDAO {
 				BookVO bv = new BookVO();
 				bv.setBookid(rs.getInt("bookid"));
 				bv.setBookname(rs.getString("bookname"));
-				bv.setPublisher(rs.getString("publihser"));
+				bv.setPublisher(rs.getString("publisher"));
 				bv.setPrice(rs.getInt("price"));
 				list.add(bv);
 			}
