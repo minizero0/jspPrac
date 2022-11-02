@@ -12,4 +12,6 @@ public class EmpVO {
 	private String ename;
 	private int dno;
 	private int salary;
+	private String phone;
+	private String email;
 }

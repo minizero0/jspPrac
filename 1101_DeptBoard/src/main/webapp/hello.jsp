@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%
-	response.sendRedirect("listDept.do");
-	%>
+	<a href = "listDept.do">부서목록</a>
+	<a href = "listEmp.do">사원목록</a>
 </body>
 </html>

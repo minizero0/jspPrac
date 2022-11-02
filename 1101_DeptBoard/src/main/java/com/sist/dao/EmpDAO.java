@@ -1,6 +1,7 @@
 package com.sist.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,6 +25,55 @@ public class EmpDAO {
 	
 	private EmpDAO() {
 		
+	}
+	//사원번호로 사원찾기
+	public EmpVO findByEno(int eno) {
+		EmpVO ev = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from emp where eno = ?";
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, eno);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ev = new EmpVO();
+				ev.setEno(rs.getInt("eno"));
+				ev.setEname(rs.getString("ename"));
+				ev.setDno(rs.getInt("dno"));
+				ev.setSalary(rs.getInt("salary"));
+				ev.setPhone(rs.getString("phone"));
+				ev.setEmail(rs.getString("email"));
+			}
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(pstmt!=null) {try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(rs!=null) {try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		
+		return ev;
 	}
 	
 	public ArrayList<EmpVO> findAll(){
