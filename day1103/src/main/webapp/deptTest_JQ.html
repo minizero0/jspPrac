@@ -9,7 +9,14 @@ $(function(){
 	$("#btnOK").click(function(){
 		$.ajax("listDept.jsp",{success:function(data){
 			var arr = eval("("+data+")");
-			console.log(arr);
+			$.each(arr, function(){
+				var tr = $("<tr></tr>");
+				var td1 = $("<td></td>").html(this.dno);
+				var td2 = $("<td></td>").html(this.dname);
+				var td3 = $("<td></td>").html(this.dloc);
+				$(tr).append(td1,td2,td3);
+				$("#list").append(tr);
+			});
 		}});
 	});
 });
