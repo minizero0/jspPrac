@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload = function () {
+		document.getElementById("btnOK").onclick = function(){
+			var list = document.getElementById("list");
+			var request = new XMLHttpRequest();
+			request.onreadystatechange = function(event){
+				if(request.readyState == 4){				//모든 데이터를 받았을 경우 수행
+					if(request.status == 200){				//서버 정상가동했을 경우 수행
+						var xml = request.responseXML;
+						var dept = xml.getElementsByTagName("dept");
+						console.log("dept:"+dept.length);
+					}else{
+						alert("서버 장애.")
+					}
+				}
+			}
+			request.open("get","listDept_XML.jsp",true);	//false = 동기, true = 비동기 
+			request.send();
+			//alert(request.responseText);
+		}
+	}
+	
+</script>
+</head>
+<body>
+<input type="text">
+	<button id = "btnOK">Ajax통신</button>
+<hr>
+<table border = "1" width = "80%">
+	<thead>
+		<tr>
+			<th>부서번호</th>
+			<th>부서명</th>
+			<th>부서위치</th>
+		</tr>
+	</thead>
+	<tbody id = "list">
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+</body>
+</html>
