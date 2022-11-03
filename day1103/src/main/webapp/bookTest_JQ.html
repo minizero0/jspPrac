@@ -7,15 +7,16 @@
 <script type="text/javascript">
 $(function(){
 	$("#btnOK").click(function(){
-		$.ajax("listDept.jsp",{success:function(data){
+		$.ajax("listBook.jsp",{success:function(data){
 			console.log(data);
 			var arr = eval(data);
 			$.each(arr, function(){
 				var tr = $("<tr></tr>");
-				var td1 = $("<td></td>").html(this.dno);
-				var td2 = $("<td></td>").html(this.dname);
-				var td3 = $("<td></td>").html(this.dloc);
-				$(tr).append(td1,td2,td3);
+				var td1 = $("<td></td>").html(this.bookid);
+				var td2 = $("<td></td>").html(this.bookname);
+				var td3 = $("<td></td>").html(this.publisher);
+				var td4 = $("<td></td>").html(this.price);
+				$(tr).append(td1,td2,td3,td4);
 				$("#list").append(tr);
 			});
 		}});
@@ -31,13 +32,15 @@ $(function(){
 <table border = "1" width = "80%">
 	<thead>
 		<tr>
-			<th>부서번호</th>
-			<th>부서명</th>
-			<th>부서위치</th>
+			<th>도서번호</th>
+			<th>도서이름</th>
+			<th>출판사</th>
+			<th>도서가격</th>
 		</tr>
 	</thead>
 	<tbody id = "list">
 		<tr>
+			<td></td>
 			<td></td>
 			<td></td>
 			<td></td>
