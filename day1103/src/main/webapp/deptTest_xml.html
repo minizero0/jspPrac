@@ -13,7 +13,29 @@
 					if(request.status == 200){				//서버 정상가동했을 경우 수행
 						var xml = request.responseXML;
 						var dept = xml.getElementsByTagName("dept");
-						console.log("dept:"+dept.length);
+						//console.log(dept[0].childNodes.length);
+						//console.log(dept[0].childNodes[0].innerHTML)				//같은의미
+						//console.log(dept[0].childNodes[0].childNodes[0].nodeValue)	//같은의미
+						for(i=0; i<dept.length;i++){
+							var d = dept[i];
+							var tr = document.createElement("tr");
+							var td1 = document.createElement("td");
+							var td2 = document.createElement("td");
+							var td3 = document.createElement("td");
+							var txt1 = document.createTextNode(d.childNodes[0].childNodes[0].nodeValue);
+							var txt2 = document.createTextNode(d.childNodes[1].childNodes[0].nodeValue);
+							var txt3 = document.createTextNode(d.childNodes[2].childNodes[0].nodeValue);
+							
+							td1.appendChild(txt1);
+							td2.appendChild(txt2);
+							td3.appendChild(txt3);
+							
+							tr.appendChild(td1);
+							tr.appendChild(td2);
+							tr.appendChild(td3);
+							
+							list.appendChild(tr);
+						}
 					}else{
 						alert("서버 장애.")
 					}
@@ -24,7 +46,6 @@
 			//alert(request.responseText);
 		}
 	}
-	
 </script>
 </head>
 <body>
