@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#btnOK").click(function(){
+		$.ajax("listDept.jsp",{success:function(data){
+			var arr = eval("("+data+")");
+			console.log(arr);
+		}});
+	});
+});
+	
+</script>
+</head>
+<body>
+<input type="text">
+	<button id = "btnOK">Ajax통신</button>
+<hr>
+<table border = "1" width = "80%">
+	<thead>
+		<tr>
+			<th>부서번호</th>
+			<th>부서명</th>
+			<th>부서위치</th>
+		</tr>
+	</thead>
+	<tbody id = "list">
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+</body>
+</html>
