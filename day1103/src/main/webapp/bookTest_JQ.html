@@ -8,9 +8,8 @@
 $(function(){
 	$("#btnOK").click(function(){
 		$.ajax("listBook.jsp",{success:function(data){
-			console.log(data);
-			var arr = eval(data);
-			$.each(arr, function(){
+			var arr = eval(data);					//문자열을 객체로 변환
+			$.each(arr, function(){					//반복문으로 객체 삽입
 				var tr = $("<tr></tr>");
 				var td1 = $("<td></td>").html(this.bookid);
 				var td2 = $("<td></td>").html(this.bookname);
