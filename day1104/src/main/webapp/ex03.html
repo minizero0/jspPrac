@@ -6,9 +6,15 @@
 <script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 	$(function () {
+		
+		$("#dept_list").val("");
+		
 		$.ajax({
 			url:"dept/List",
 			success:function(arr){
+				var option = $("<option></option>").html("부서선택")
+				$("#dept_list").append(option);
+				
 				$.each(arr,function(){
 					var option = $("<option></option>").html(this.dname).attr("value",this.dno);
 					$("#dept_list").append(option);
