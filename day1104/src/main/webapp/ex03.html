@@ -10,18 +10,27 @@
 			url:"dept/List",
 			success:function(arr){
 				$.each(arr,function(){
-					var option = $("<option></option>").html(this.dname).attr("value".this.dno);
+					var option = $("<option></option>").html(this.dname).attr("value",this.dno);
 					$("#dept_list").append(option);
 				})
 			}})
-		$.ajax({
-			url:"emp/List",
-			success:function(arr){
-				$.each(arr,function(){
-					var option = $("<option></option>").html(this.ename);
-					$("#emp_list").append(option);
-				})
-			}})
+			
+		$("#dept_list").change(function(){
+			var dno = $(this).val();
+			$.ajax({
+				url:"emp/List",
+				data:{dno:dno},
+				success:function(arr){
+					$("#emp_list").empty();
+					$.each(arr, function(){
+						var option = $("<option></option>").html(this.ename);
+						$("#emp_list").append(option);	
+					})
+					
+				}
+			})
+			
+		})
 	});
 	
 </script>
