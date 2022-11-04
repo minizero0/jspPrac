@@ -28,6 +28,53 @@ public class BookDAO {
 		
 	}
 	
+	public ArrayList<BookVO> findByPublisher(String publisher){
+		ArrayList<BookVO> list = new ArrayList<>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String sql = "select * from book where publisher = '"+publisher+"'";
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				BookVO bv = new BookVO();
+				bv.setBookid(rs.getInt("bookid"));
+				bv.setBookname(rs.getString("bookname"));
+				bv.setPublisher(rs.getString("publisher"));
+				bv.setPrice(rs.getInt("price"));
+				list.add(bv);
+			}
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(stmt!=null) {try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(rs!=null) {try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		return list;
+	}
+	
+	
+	
 	public ArrayList<String> listPublisher(){
 		ArrayList<String> list = new ArrayList<>();
 		Connection conn = null;
