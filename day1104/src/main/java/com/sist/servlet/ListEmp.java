@@ -19,23 +19,26 @@ import com.sist.vo.EmpVO;
 /**
  * Servlet implementation class ListDept
  */
-@WebServlet("/dept/List")
-public class ListDept extends HttpServlet {
+@WebServlet("/emp/List")
+public class ListEmp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-  
+    public ListEmp() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json;charset=utf-8");
-		
-		DeptDAO dao = DeptDAO.getInstance();
-		ArrayList<DeptVO> list = dao.findAll();
+		EmpDAO dao = EmpDAO.getInstance();
+		int dno = Integer.parseInt(request.getParameter("dno"));
+		ArrayList<EmpVO> list = dao.findByDno(dno);
 		Gson gson = new Gson();
 		String str = gson.toJson(list);
 		PrintWriter out = response.getWriter();
