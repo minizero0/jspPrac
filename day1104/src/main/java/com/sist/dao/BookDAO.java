@@ -13,6 +13,7 @@ import javax.naming.spi.DirStateFactory.Result;
 import javax.sql.DataSource;
 
 import com.sist.vo.BookVO;
+import com.sist.vo.CustomerOrder;
 
 public class BookDAO {
 	private static BookDAO dao;
@@ -26,6 +27,58 @@ public class BookDAO {
 	
 	private BookDAO() {
 		
+	}
+	
+	
+	
+	public ArrayList<CustomerOrder> findCusomer(int bookid){
+		ArrayList<CustomerOrder> list = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select c.custid, name, address, phone, orderid, saleprice, orderdate from customer c, orders o, book b"
+				+ " where c.custid = o.custid and b.bookid = o.bookid and b.bookid = ?";
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bookid);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				CustomerOrder co = new CustomerOrder();
+				co.setCustid(rs.getInt("custid"));
+				co.setName(rs.getString("name"));
+				co.setOrderid(rs.getInt("orderid"));
+				co.setPhone(rs.getString("phone"));
+				co.setSaleprice(rs.getInt("saleprice"));
+				co.setAddress(rs.getString("address"));
+				co.setOrderdate(rs.getDate("orderdate"));
+				list.add(co);
+			}
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(pstmt!=null) {try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(rs!=null) {try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		return list;
 	}
 	
 	public ArrayList<BookVO> findByPublisher(String publisher){
