@@ -29,13 +29,29 @@
 				success:function(arr){
 					$("#emp_list").empty();
 					$.each(arr, function(){
-						var option = $("<option></option>").html(this.ename);
-						$("#emp_list").append(option);	
+						var option = $("<option></option>").html(this.ename).attr("value",this.eno);
+						$("#emp_list").append(option);
 					})
 					
 				}
 			})
 			
+		})
+		$("#emp_list").change(function () {
+			var eno = $(this).val();
+			console.log(eno);
+			$.ajax({
+				url:"Emp",
+				data:{eno:eno},
+				success:function(arr){
+					$("#salary").html(arr.salary)
+					$("#eno").html(arr.eno)
+					$("#dno").html(arr.dno)
+					$("#ename").html(arr.ename)
+					$("#phone").html(arr.phone)
+					$("#email").html(arr.email)
+				}
+			})
 		})
 	});
 	
@@ -44,6 +60,14 @@
 <body>
 	<select id = "dept_list"></select>
 	<select id = "emp_list"></select>
+	<div id = "emp_detail">
+		사원번호 : <span id = "eno"></span><br>
+		사원이름 : <span id = "ename"></span><br>
+		부서번호 : <span id = "dno"></span><br>
+		사원급여 : <span id = "salary"></span><br>
+		전화 : <span id ="phone"></span><br>
+		이메일 : <span id = "email"></span><br>
+		</div>
 	<table border = "1" width = "80%">
 		<tr><td>이름</td><td>국어</td><td>영어</td><td>수학</td></tr>
 		<tr><td>이순신</td><td>100</td><td>60</td><td>70</td></tr>
