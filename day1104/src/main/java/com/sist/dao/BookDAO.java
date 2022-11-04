@@ -28,6 +28,48 @@ public class BookDAO {
 		
 	}
 	
+	public ArrayList<String> listPublisher(){
+		ArrayList<String> list = new ArrayList<>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String sql = "select distinct(publisher) from book";
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(rs!=null) {try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(stmt!=null) {try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		
+		return list;
+	}
+	
 	public int maxBookid() {
 		int bookid = 0;
 		Connection conn = null;

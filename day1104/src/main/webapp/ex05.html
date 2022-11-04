@@ -46,18 +46,16 @@
 		})
 		$("#emp_list").change(function () {
 			$("#emp_detail").css("display", "block");
+			var list = $("#emp_detail").find("span");
+			var i = 0;
 			var eno = $(this).val();
-			
 			$.ajax({
 				url:"Emp",
 				data:{eno:eno},
 				success:function(arr){
-					$("#salary").html(arr.salary)
-					$("#eno").html(arr.eno)
-					$("#dno").html(arr.dno)
-					$("#ename").html(arr.ename)
-					$("#phone").html(arr.phone)
-					$("#email").html(arr.email)
+					$.each(arr, function(key, value){
+						$(list[i++]).html(value);
+					})
 				}
 			})
 		})
@@ -69,12 +67,12 @@
 	<select id = "dept_list"></select>
 	<select id = "emp_list"></select>
 	<div id = "emp_detail">
-		사원번호 : <span id = "eno"></span><br>
-		사원이름 : <span id = "ename"></span><br>
-		부서번호 : <span id = "dno"></span><br>
-		사원급여 : <span id = "salary"></span><br>
-		전화 : <span id ="phone"></span><br>
-		이메일 : <span id = "email"></span><br>
+		사원번호 : <span></span><br>
+		사원이름 : <span></span><br>
+		부서번호 : <span></span><br>
+		사원급여 : <span></span><br>
+		전화 : <span></span><br>
+		이메일 : <span></span><br>
 		</div>
 	<table border = "1" width = "80%">
 		<tr><td>이름</td><td>국어</td><td>영어</td><td>수학</td></tr>
