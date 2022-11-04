@@ -28,6 +28,9 @@
 				data:{dno:dno},
 				success:function(arr){
 					$("#emp_list").empty();
+					var option = $("<option></option>").html("사원을 선택하세요").attr("value",0);
+					$("#emp_list").append(option);
+					
 					$.each(arr, function(){
 						var option = $("<option></option>").html(this.ename).attr("value",this.eno);
 						$("#emp_list").append(option);
