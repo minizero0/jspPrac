@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.sist.dao.DeptDAO;
 import com.sist.vo.DeptVO;
+import com.sist.vo.JsonResult;
 
 /**
  * Servlet implementation class EditDept
@@ -51,8 +53,15 @@ public class EditDept extends HttpServlet {
 		case "edit": re = dao.updateDept(d);break;
 		case "del": re = dao.deleteDept(dno);break;
 		}
+		JsonResult jr = new JsonResult();
+		jr.setResult("success");
+		if(re <= 0) {
+			jr.setResult("fail");
+		}
+		Gson gson = new Gson();
+		String str = gson.toJson(jr);
 		PrintWriter out = response.getWriter();
-		out.print(re);
+		out.print(str);
 		out.close();
 	}
 

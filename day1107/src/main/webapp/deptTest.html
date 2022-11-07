@@ -14,37 +14,59 @@
 		})
 		
 		$("#btnDelete").click(function(){
-			
+			if(confirm("정말로 삭제하시겠습니까?")){
+				var data = {
+						dno:$("#dno").val(),
+						oper:"del"
+				}
+				$.post(
+						"EditDept",
+						data,
+						function(re){
+							alert(re);
+							listDept();
+						}
+				)
+			}
 		})
 		
 		$("#btnUpdate").click(function(){
-			
-		})
-		
-		$("#btnAdd").click(function(){
-			var dno = $("#dno").val();
-			var dname = $("#dname").val();
-			var dloc = $("#dloc").val();
 			var data = {
-					dno:dno,
-					dname:dname,
-					dloc:dloc,
-					oper:"add"
+					dno:$("#dno").val(),
+					dname:$("#dname").val(),
+					dloc:$("#dloc").val(),
+					oper:"edit"
 			}
-			$.get("EditBook",
+			$.post("EditDept",
 					data,
 					function(re){
 					alert(re);
 					listDept();
-				
+			})
+			
+		})
+		
+		$("#btnAdd").click(function(){
+			var data = {
+					dno:$("#dno").val(),
+					dname:$("#dname").val(),
+					dloc:$("#dloc").val(),
+					oper:"add"
+			}
+			$.post("EditDept",
+					data,
+					function(re){
+					alert(re);
+					listDept();
 			})
 		})
 		
 		
 		var listDept = function(){
+			$("#list").empty();
 			$.getJSON("ListDept",function(arr){
 				$.each(arr, function(){
-					var tr = $("<tr></tr>");
+					var tr = $("<tr></tr>").addClass("dept");
 					var td1 = $("<td></td>").html(this.dno);
 					var td2 = $("<td></td>").html(this.dname);
 					var td3 = $("<td></td>").html(this.dloc);
