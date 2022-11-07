@@ -86,16 +86,21 @@
 		
 		var listDept = function(){
 			$("#list").empty();
-			$.getJSON("ListDept",function(arr){
-				$.each(arr, function(){
-					var tr = $("<tr></tr>").addClass("dept");
-					var td1 = $("<td></td>").html(this.dno);
-					var td2 = $("<td></td>").html(this.dname);
-					var td3 = $("<td></td>").html(this.dloc);
+			//ListDeptXML
+			$.get("ListDeptXML",function(r){
+				var arr = $(r).find("dept");
+				$.each(arr,function(){
+					var dno = $(this).find("dno").text();
+					var dname = $(this).find("dname").text();
+					var dloc = $(this).find("dloc").text();
+					var tr = $("<tr></tr>");
+					var td1 = $("<td></td>").html(dno);
+					var td2 = $("<td></td>").html(dname);
+					var td3 = $("<td></td>").html(dloc);
 					$(tr).append(td1,td2,td3);
 					$("#list").append(tr);
 				})
-			})	
+			})
 		}
 		
 		listDept();
