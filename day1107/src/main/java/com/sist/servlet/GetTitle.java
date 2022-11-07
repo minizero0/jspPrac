@@ -33,7 +33,6 @@ public class GetTitle extends HttpServlet {
 		out.print("**** 도서관리시스템 ****");
 		out.close();
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
