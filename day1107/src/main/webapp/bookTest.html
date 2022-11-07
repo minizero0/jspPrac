@@ -6,6 +6,15 @@
 <script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 	$(function () {
+		
+		$(document).on("click",".book",function(){		//이 후에 새로운 tr에도 click 함수 적용
+			var td = $(this).find("td");
+			$("#bookid").val($(td[0]).html())
+			$("#bookname").val($(td[1]).html())
+			$("#publisher").val($(td[2]).html())
+			$("#price").val($(td[3]).html())
+		})
+		
 		$("#btnAdd").click(function(){
 			var bookid = $("#bookid").val();
 			var bookname = $("#bookname").val();
@@ -25,14 +34,14 @@
 					listBook();
 				}
 			})
-		})
+		})	
 		
 		var listBook = function(){
 			//$.ajax({url:"",success:function(arr){}})
 			$("#list").empty();
 			$.getJSON("ListBook",function(arr){
 				$.each(arr,function(){
-					var tr = $("<tr></tr>")
+					var tr = $("<tr></tr>").addClass("book");
 					var td1 = $("<td></td>").html(this.bookid);
 					var td2 = $("<td></td>").html(this.bookname);
 					var td3 = $("<td></td>").html(this.publisher);
