@@ -29,6 +29,40 @@ public class BookDAO {
 		
 	}
 	
+	public int deleteBook(int bookid) {
+		int re = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete book where bookid = ?";
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bookid);
+			re = pstmt.executeUpdate(); 
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(pstmt!=null) {try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		
+		
+		return re;
+	}
+	
 	
 	
 	public ArrayList<CustomerOrder> findCusomer(int bookid){
