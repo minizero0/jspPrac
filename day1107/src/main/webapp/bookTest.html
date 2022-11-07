@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#btnAdd").click(function(){
+			var bookid = $("#bookid").val();
+			var bookname = $("#bookname").val();
+			var publisher = $("#publisher").val();
+			var price = $("#price").val();
+			var data = {
+					bookid:bookid,
+					bookname:bookname,
+					publisher:publisher,
+					price:price
+			}
+			$.ajax({
+				url:"InsertBook",
+				data:data,
+				success:function(re){
+					alert(re);
+					listBook();
+				}
+			})
+		})
+		
+		var listBook = function(){
+			//$.ajax({url:"",success:function(arr){}})
+			$("#list").empty();
+			$.getJSON("ListBook",function(arr){
+				$.each(arr,function(){
+					var tr = $("<tr></tr>")
+					var td1 = $("<td></td>").html(this.bookid);
+					var td2 = $("<td></td>").html(this.bookname);
+					var td3 = $("<td></td>").html(this.publisher);
+					var td4 = $("<td></td>").html(this.price);
+					$(tr).append(td1,td2,td3,td4);
+					$("#list").append(tr);
+				})
+			})
+		}
+		listBook();
+	})
+</script>
+</head>
+<body>
+	도서번호 : <input type="number" id = "bookid" required="required"><br>
+	도서이름 : <input type="text" id = "bookname" required="required"><br>
+	출판사명 : <input type="text" id = "publisher" required="required"><br>
+	도서가격 : <input type="number" id = "price" required="required"><br>
+	<hr>
+	<button id = "btnAdd">등록</button>
+	
+	<table border = "1" width = "80%">
+		<thead>
+			<tr>
+				<th>도서번호</th>
+				<th>도서명</th>
+				<th>출판사</th>
+				<th>가격</th>
+			</tr>
+		</thead>
+		<tbody id = "list">
+		
+		</tbody>
+	</table>
+</body>
+</html>
