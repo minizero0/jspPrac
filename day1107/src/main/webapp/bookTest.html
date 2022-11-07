@@ -35,6 +35,32 @@
 				}
 			})
 		})	
+		$("#btnUpdate").click(function(){
+			var bookid = $("#bookid").val();
+			var bookname = $("#bookname").val();
+			var publisher = $("#publisher").val();
+			var price = $("#price").val();
+			var data = {
+					bookid:bookid,
+					bookname:bookname,
+					publisher:publisher,
+					price:price
+			}
+			$.post("UpdateBook",
+					data,
+					function(re){
+						alert(re);
+						listBook();
+			})
+			/* $.ajax({
+				url:"UpdateBook",
+				data:data,
+				success:function(re){
+					alert(re);
+					listBook();
+				}
+			}) */
+		})	
 		
 		var listBook = function(){
 			//$.ajax({url:"",success:function(arr){}})
@@ -62,6 +88,7 @@
 	도서가격 : <input type="number" id = "price" required="required"><br>
 	<hr>
 	<button id = "btnAdd">등록</button>
+	<button id = "btnUpdate">수정</button>
 	
 	<table border = "1" width = "80%">
 		<thead>
