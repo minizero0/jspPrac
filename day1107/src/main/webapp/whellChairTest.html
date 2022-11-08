@@ -9,8 +9,23 @@
 	}
 </style>
 <script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=08525e21e724a58505b7e1880ea6a302"></script>
 <script type="text/javascript">
 	$(function(){
+		$(document).on("click",".loc",function(){
+			var lat = $(this).attr("lat");
+			var lng = $(this).attr("lng");
+			var moveLatLon = new kakao.maps.LatLng(lat,lng);
+			map.panTo(moveLatLon);
+			var marker = new kakao.maps.Marker({
+			     position: moveLatLon
+			 	});
+
+			 // 마커가 지도 위에 표시되도록 설정합니다
+			 marker.setMap(map);
+			
+		})
+		
 		var list = [];
 		var pageSIZE = 10; 		//한화면에 보여줄 레코드의 수
 		var totalRecord = 0; 	//전체 레코드의 수
@@ -24,21 +39,6 @@
 				var 주소 = $(this).find("소재지도로명주소").text();
 				if(주소.match("서울")){
 					list.push(this);
-					var 시설명 = $(this).find("시설명").text();
-					var 위도 = $(this).find("위도").text();
-					var 경도 = $(this).find("경도").text();
-					var 평일운영시작시각 = $(this).find("평일운영시작시각").text();
-					var 평일운영종료시각 = $(this).find("평일운영종료시각").text();
-					var 관리기관전화번호 = $(this).find("관리기관전화번호").text();
-					var tr = $("<tr></tr>");
-					var td1 = $("<td></td>").html(시설명);
-					var td2 = $("<td></td>").html(위도);
-					var td3 = $("<td></td>").html(경도);
-					var td4 = $("<td></td>").html(평일운영시작시각);
-					var td5 = $("<td></td>").html(평일운영종료시각);
-					var td6 = $("<td></td>").html(관리기관전화번호);
-					$(tr).append(td1,td2,td3,td4,td5,td6);
-					$("#list").append(tr)	
 				}
 			})
 			totalRecord = list.length;
@@ -47,6 +47,7 @@
 				var span = $("<span></span>").html(i).addClass("page");
 				$("#pageStr").append(span);
 			}
+			pageData(1)
 		})
 		
 		$(document).on("click",".page",function(){
@@ -57,8 +58,56 @@
 		var pageData = function(pageNUM){
 			var start = (pageNUM-1)*pageSIZE;
 			var end = start + pageSIZE - 1;
+			if(end > totalRecord){
+				end = totalRecord-1;
+			}
+			$("#list").empty()
+			for(i=start; i<=end;i++){
+				var 시설명 = $(list[i]).find("시설명").text();
+				var 위도 = $(list[i]).find("위도").text();
+				var 경도 = $(list[i]).find("경도").text();
+				var 평일운영시작시각 = $(list[i]).find("평일운영시작시각").text();
+				var 평일운영종료시각 = $(list[i]).find("평일운영종료시각").text();
+				var 관리기관전화번호 = $(list[i]).find("관리기관전화번호").text();
+				var tr = $("<tr></tr>").addClass("loc").attr({lat:위도,lng:경도})
+				var td1 = $("<td></td>").html(시설명);
+				var td2 = $("<td></td>").html(위도);
+				var td3 = $("<td></td>").html(경도);
+				var td4 = $("<td></td>").html(평일운영시작시각);
+				var td5 = $("<td></td>").html(평일운영종료시각);
+				var td6 = $("<td></td>").html(관리기관전화번호);
+				$(tr).append(td1,td2,td3,td4,td5,td6);
+				$("#list").append(tr)	
+			}
 			console.log(start, end);
 		}
+		
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    	mapOption = { 
+        center: new kakao.maps.LatLng(37.55772101258283, 126.91929929140457), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+		
+		$("#moveSist").click(function(){
+			 // 이동할 위도 경도 위치를 생성합니다 
+		    var moveLatLon = new kakao.maps.LatLng(37.5565426, 126.9195486);
+		    
+		    // 지도 중심을 부드럽게 이동시킵니다
+		    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+		    map.panTo(moveLatLon);
+		    
+
+		 // 마커를 생성합니다
+		 	var marker = new kakao.maps.Marker({
+		     position: moveLatLon
+		 	});
+
+		 // 마커가 지도 위에 표시되도록 설정합니다
+		 marker.setMap(map);
+		})
 		
 	})
 	
@@ -68,7 +117,7 @@
 <!-- 시설명, 위도, 경도, 평일운영시작시각, 평일운영종료시각, 관리기관전화번호 -->
 <table border = "1" width = "80%" id = "list"></table>
 <div id = "pageStr"></div>
-
+<div id="map" style="width:100%;height:350px;"></div>
 
 </body>
 </html>
