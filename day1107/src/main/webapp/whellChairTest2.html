@@ -49,17 +49,6 @@
 			}
 		})
 		
-		$(document).on("click",".page",function(){
-			var pageNUM = eval($(this).html())
-			pageData(pageNUM)
-		})
-		
-		var pageData = function(pageNUM){
-			var start = (pageNUM-1)*pageSIZE;
-			var end = start + pageSIZE - 1;
-			console.log(start, end);
-		}
-		
 	})
 	
 </script>
@@ -67,7 +56,7 @@
 <body>
 <!-- 시설명, 위도, 경도, 평일운영시작시각, 평일운영종료시각, 관리기관전화번호 -->
 <table border = "1" width = "80%" id = "list"></table>
-<div id = "pageStr"></div>
+<div id = "pageStr"><a href = ""></a></div>
 
 
 </body>
