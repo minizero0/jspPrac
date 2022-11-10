@@ -12,26 +12,29 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 $(function () {
+	
+	
+	
 	//모든 회원목록을 Ajax통신으로 읽어와서 테이블에 출력하는 함수 
 	var listMember = function(){
 		$.ajax({
-			url:"SistAction",
+			url:"ListCust",
 			success:function(arr){
+				$("#list").empty()
 				$.each(arr, function(){
 					var tr = $("<tr></tr>")
-					var td1 = $("<td></td>").html(this.name);
-					var td2 = $("<td></td>").html(this.gender);
-					var td3 = $("<td></td>").html(this.loc);
-					var td4 = $("<td></td>").html(this.blood);
-					$(tr).append(td1,td2,td3,td4);
+					$(tr).append($("<td></td>").html(this.id))
+					$(tr).append($("<td></td>").html(this.name))
+					$(tr).append($("<td></td>").html(this.gender))
+					$(tr).append($("<td></td>").html(this.loc))
+					$(tr).append($("<td></td>").html(this.blood))
 					$("#list").append(tr);
 				})
-				
 			}	
 		})
 	}
-	listMemeber;
 	
+	listMember();
 	
 	$("#addBtn").click(function () {
 		var data = $("#f").serializeArray();
@@ -39,21 +42,50 @@ $(function () {
 			url:"InsertCust",
 			data:data,
 			success:function(data){
-				console.log(data);
+				listMember();
 			}
 		})
 	});
+	
+	$("#updateBtn").click(function(){
+		var data = $("#f").serializeArray();
+		$.ajax({
+			url:"UpdateCust",
+			data:data,
+			success:function(data){
+				listMember();
+			}
+		})
+	})
+	
+	$("#deleteBtn").click(function(){
+		
+	})
 });
 </script>
 </head>
 <body>
 <form id ="f">
+	<span>아이디</span><input type = "text" name = "id"><br>
 	<span>이름</span><input type = "text" name = "name"><br>
 	<span>성별</span><input type = "text" name = "gender"><br>
 	<span>지역</span><input type = "text" name = "loc"><br>
 	<span>혈액형</span><input type = "text" name = "blood"><br>
 </form>
 <button id = "addBtn">추가</button>
-	<table border = 1 id = "list"></table>
+<button id = "updateBtn">수정</button>
+<button id = "deleteBtn">삭제</button>
+	<table >
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>NAME</th>
+			<th>GENDER</th>
+			<th>ADDR</th>
+			<th>BLOOD</th>
+		</tr>
+	</thead>
+	<tbody id = "list"></tbody>
+	</table>
 </body>
 </html>

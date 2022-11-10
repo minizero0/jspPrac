@@ -17,14 +17,14 @@ import com.sist.vo.CustVO;
 /**
  * Servlet implementation class SistAction
  */
-@WebServlet("/SistAction")
-public class SistAction extends HttpServlet {
+@WebServlet("/ListCust")
+public class ListCust extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SistAction() {
+    public ListCust() {
         super();
         // TODO Auto-generated constructor stub
     }

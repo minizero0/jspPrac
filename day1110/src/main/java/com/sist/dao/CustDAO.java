@@ -27,6 +27,76 @@ private static CustDAO dao;
 		
 	}
 	
+	public int delete(int id) {
+		int re = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete educust where id = ?";
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			re = pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(pstmt!=null) {try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		
+		return re;
+	}
+	
+	public int updateCust(CustVO cv) {
+		int re = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update educust set name = ?, gender = ?, loc = ?, blood = ? where id = ?";
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cv.getName());
+			pstmt.setString(2, cv.getGender());
+			pstmt.setString(3, cv.getLoc());
+			pstmt.setString(4, cv.getBlood());
+			pstmt.setInt(5, cv.getId());
+			re = pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(pstmt!=null) {try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		
+		return re;
+	}
+	
 	
 	
 	public int addCust(CustVO cv) {
