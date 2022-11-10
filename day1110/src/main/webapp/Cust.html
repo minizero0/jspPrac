@@ -66,14 +66,17 @@ $(function () {
 	})
 	
 	$("#deleteBtn").click(function(){
-		var data = $("#f").serializeArray();
-		$.ajax({
-			url:"DeleteCust",
-			data:data,
-			success:function(data){
-				listMember();
-			}
-		})
+		if(confirm("정말로 삭제하시겠어요?")){
+			var data = $("#f").serializeArray();
+			$.ajax({
+				url:"DeleteCust",
+				data:data,
+				success:function(data){
+					listMember();
+				}
+			})	
+		}
+		
 	})
 });
 </script>
