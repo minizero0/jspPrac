@@ -8,9 +8,16 @@
 $(function(){
 	$.ajax({
 		url:"ListGoods",
-		function(data){
+		success:function(data){
 			$.each(data, function(){
-				
+				var div = $("<div></div>").addClass("goods");
+				var img = $("<img/>").attr({
+					src:"images/"+this.fname,
+					width:"50",
+					height:"50"
+				})
+				$(div).append(img)
+				$("#list").append(div)
 			})
 		}
 	})
