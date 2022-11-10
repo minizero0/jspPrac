@@ -6,8 +6,17 @@
 <script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#my_form").submit(function(){
-			alert("ok");
+		$("#my_form").submit(function(e){
+			var name = $("#name").val();
+			var age = $("#age").val();
+			var url = "ActionWithData?name="+name+"&age="+age;
+			
+			/* $.get(url, function(data){
+				$("#wrap").html(data);
+			}); */
+			$("#wrap").load(url);
+			
+			e.preventDefault();
 		})
 	})
 </script>
@@ -17,6 +26,7 @@
 	이름 : <input type = "text" name = "name" id = "name"><br>
 	나이 : <input type = "text" name = "age" id = "age"><br>
 	<input type = "submit" value = "확인">
+	<div id = "wrap"></div>
 </form>
 </body>
 </html>

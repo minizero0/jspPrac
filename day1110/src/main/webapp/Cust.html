@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	#f span{
+		width : 70px;
+		display : inline-block;
+	}
+</style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+$(function () {
+	//모든 회원목록을 Ajax통신으로 읽어와서 테이블에 출력하는 함수 
+	var listMember = function(){
+		$.ajax({
+			url:"SistAction",
+			success:function(arr){
+				$.each(arr, function(){
+					var tr = $("<tr></tr>")
+					var td1 = $("<td></td>").html(this.name);
+					var td2 = $("<td></td>").html(this.gender);
+					var td3 = $("<td></td>").html(this.loc);
+					var td4 = $("<td></td>").html(this.blood);
+					$(tr).append(td1,td2,td3,td4);
+					$("#list").append(tr);
+				})
+				
+			}	
+		})
+	}
+	listMemeber;
+	
+	
+	$("#addBtn").click(function () {
+		var data = $("#f").serializeArray();
+		$.ajax({
+			url:"InsertCust",
+			data:data,
+			success:function(data){
+				console.log(data);
+			}
+		})
+	});
+});
+</script>
+</head>
+<body>
+<form id ="f">
+	<span>이름</span><input type = "text" name = "name"><br>
+	<span>성별</span><input type = "text" name = "gender"><br>
+	<span>지역</span><input type = "text" name = "loc"><br>
+	<span>혈액형</span><input type = "text" name = "blood"><br>
+</form>
+<button id = "addBtn">추가</button>
+	<table border = 1 id = "list"></table>
+</body>
+</html>
