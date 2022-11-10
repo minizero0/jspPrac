@@ -13,9 +13,12 @@
 <script type="text/javascript">
 $(function () {
 	$(document).on("click", ".cust", function(){
-		
-		console.log(this)
-		console.log($(this).attr("td[0]"));
+		var td = $(this).find("td");
+		$("#id").val($(td[0]).html())
+		$("#name").val($(td[1]).html())
+		$("#gender").val($(td[2]).html())
+		$("#loc").val($(td[3]).html())
+		$("#blood").val($(td[4]).html())
 	})
 	
 	
@@ -77,11 +80,11 @@ $(function () {
 </head>
 <body>
 <form id ="f">
-	<span>아이디</span><input type = "text" name = "id"><br>
-	<span>이름</span><input type = "text" name = "name"><br>
-	<span>성별</span><input type = "text" name = "gender"><br>
-	<span>지역</span><input type = "text" name = "loc"><br>
-	<span>혈액형</span><input type = "text" name = "blood"><br>
+	<input type = "hidden" name = "id" id = "id"><br>
+	<span>이름</span><input type = "text" name = "name" id = "name"><br>
+	<span>성별</span><input type = "text" name = "gender" id = "gender"><br>
+	<span>지역</span><input type = "text" name = "loc" id = "loc"><br>
+	<span>혈액형</span><input type = "text" name = "blood" id = "blood"><br>
 </form>
 <button id = "addBtn">추가</button>
 <button id = "updateBtn">수정</button>
