@@ -12,7 +12,11 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 $(function () {
-	
+	$(document).on("click", ".cust", function(){
+		
+		console.log(this)
+		console.log($(this).attr("td[0]"));
+	})
 	
 	
 	//모든 회원목록을 Ajax통신으로 읽어와서 테이블에 출력하는 함수 
@@ -22,7 +26,7 @@ $(function () {
 			success:function(arr){
 				$("#list").empty()
 				$.each(arr, function(){
-					var tr = $("<tr></tr>")
+					var tr = $("<tr></tr>").addClass("cust")
 					$(tr).append($("<td></td>").html(this.id))
 					$(tr).append($("<td></td>").html(this.name))
 					$(tr).append($("<td></td>").html(this.gender))
@@ -59,7 +63,14 @@ $(function () {
 	})
 	
 	$("#deleteBtn").click(function(){
-		
+		var data = $("#f").serializeArray();
+		$.ajax({
+			url:"DeleteCust",
+			data:data,
+			success:function(data){
+				listMember();
+			}
+		})
 	})
 });
 </script>

@@ -32,12 +32,8 @@ public class DeleteCust extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		cv.setName(request.getParameter("name"));
-		cv.setGender(request.getParameter("gender"));
-		cv.setLoc(request.getParameter("loc"));
-		cv.setBlood(request.getParameter("blood"));
 		CustDAO dao = CustDAO.getInstance();
-		int re = dao.updateCust(cv);
+		int re = dao.delete(id);
 		PrintWriter out = response.getWriter();
 		out.print(re);
 		out.close();
