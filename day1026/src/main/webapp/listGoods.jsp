@@ -32,7 +32,7 @@
 </script>
 </head>
 <body>
-<jsp:useBean id="dao" class = "com.sist.dao.GoodsDAO"/>
+<jsp:useBean id="d" class = "w"/>
 	<h2>상품목록</h2>
 	<hr>
 	<h3><a href = "insertGoods.jsp">상품등록</a></h3>

@@ -16,7 +16,7 @@
 </script>
 </head>
 <body>
-<jsp:useBean id="dao" class = "com.sist.dao.GoodsDAO"/>
+<jsp:useBean id="d" class = "w"/>
 <h2>상품 상세</h2>
 <hr>
 	<% 

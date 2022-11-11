@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:useBean id="dao" class = "com.sist.dao.GoodsDAO"/>
+<jsp:useBean id="d" class = "w"/>
 	<%
 		if(request.getParameter("no")!=null){
 			int no = Integer.parseInt(request.getParameter("no"));

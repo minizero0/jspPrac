@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$("#btnAdd").click(function(){
+		var name = $("#name").val();
+		var message = $("#message").val();
+		console.log(name,message)
+		var data = {
+				name:name,
+				message:message
+		}
+		
+		$.ajax({
+			url:"ChatMessage",
+			data:data,
+			type:"post",
+			success:function(re){
+				alert(re);
+			}
+		})
+	})
+	
+	function listMessage() {
+		  $.ajax({
+			  url:"ChatMessage",
+			  success:function(data){
+				  $("#list").empty()
+				  $.each(data, function(){
+					  var h2 = $("<h2></h2>").html(this.name);
+					  var div = $("<div></div>").html(this.message);
+					  $("#list").append(h2,div)
+				  })
+			  }
+		  })
+		}
+	setInterval(listMessage, 3000);
+	
+	
+})
+
+</script>
+</head>
+<body>
+	닉네임: <input type="text" name = "name" id = "name"><br>
+	메시지: <input type="text" name = "message" id = "message"><br>
+	<button id = "btnAdd">글쓰기</button>
+	
+	<div id = "list">
+		<h2></h2>
+		<div></div>
+	</div>
+	
+</body>
+</html>

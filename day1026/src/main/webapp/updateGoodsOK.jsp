@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:useBean id="dao" class = "com.sist.dao.GoodsDAO"/>
+<jsp:useBean id="d" class = "w"/>
 	<% 
 	request.setCharacterEncoding("utf-8"); 
 	GoodsVO gv = new GoodsVO();
