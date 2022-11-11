@@ -22,17 +22,36 @@
 <script type="text/javascript" src = "jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
 <script type="text/javascript">
 	$(function(){
+		$("#open_button").click(function(){
+			$("#dialog").dialog('open');
+		})
+		
 		$("#dialog").dialog({
-			autoOpen:true,
+			autoOpen:false,
 			modal:true,
 			buttons:{
-				submit:function(){},
-				reset:function(){},
-				cancel:function(){}
+				submit:function(){
+					var eventName = $("#event_name").val();
+					var eventDate = $("#event_date").val();
+					$("#output").append($("<h1></h1>").html(eventName+" : "+eventDate));
+					$("#event_name").val();
+					$("#event_date").val();
+					$("#dialog").dialog("close");
+				},
+				reset:function(){
+				
+					$("#event_name").val('');
+					$("#event_date").val('');
+				},
+				cancel:function(){
+					$("#event_name").val('');
+					$("#event_date").val('');
+					$("#dialog").dialog("close");
+				}
 			}
 		});
 		$("#event_date").datepicker({
-			dateFormat:"yyyy/mm/dd",
+			dateFormat:"yy/mm/dd",
 			numberOfMonths:3
 		});
 	})
@@ -40,8 +59,11 @@
 
 </head>
 <body>
+	<h1 id = "open_button">일정 생성</h1>
+	<hr>
+	<div id = "output"></div>
 	<div id = "dialog">
-		<h1>Hello Jquery UI</h1>
+		<h1>일정 등록</h1>
 		<label for = "event_name">일정이름</label>
 		<input type = "text" id = "event_name">
 		<label for ="event_date">일정날짜</label>
