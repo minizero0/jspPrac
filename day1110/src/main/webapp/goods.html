@@ -6,11 +6,11 @@
 <style type="text/css">
 .goods{
 	display:inline-block;
-	width:150px;
-	height:150px;
+	width:250px;
+	height:300px;
 	border:solid 2px pink;
 	border-radius:15px;
-	margin:10px;
+	margin:20px;
 	padding:10px;
 }
 
@@ -25,13 +25,13 @@ $(function(){
 				var div = $("<div></div>").addClass("goods");
 				var img = $("<img/>").attr({
 					src:"images/"+this.fname,
-					width:"50",
-					height:"50"
+					width:"200",
+					height:"200"
 				})
-				var name = $("<span></span>").html(this.name);
-				var qty = $("<span></span>").html(this.qty);
-				var price = $("<span></span>").html(this.price);
-				$(div).append(img, "<br>상품명:\t", name, "<br>개수:\t",qty, "<br>가격:\t", price);
+				var name = $("<div></div>").html("<b>"+this.no +" : "+this.name + "<b>");
+				var qty = $("<div></div>").html("수량:"+this.qty);
+				var price = $("<div></div>").html("가격:"+this.price);
+				$(div).append(img, name,qty, price);
 				$("#list").append(div)
 			})
 		}
