@@ -14,6 +14,16 @@
 	padding:10px;
 }
 
+ul{
+	overflow:hidden;
+}
+
+li{
+	float: left;
+	list-style: none;
+	padding: 10px;
+	cursor: pointer;
+}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
@@ -31,7 +41,7 @@ $(function(){
 				var name = $("<div></div>").html("<b>"+this.no +" : "+this.name + "<b>");
 				var qty = $("<div></div>").html("수량:"+this.qty);
 				var price = $("<div></div>").html("가격:"+this.price);
-				$(div).append(img, name,qty, price);
+				$(div).append(name, img, qty, price);
 				$("#list").append(div)
 			})
 		}
@@ -40,6 +50,8 @@ $(function(){
 </script>
 </head>
 <body>
+	<ul class = "paging_button"></ul>
 	<div id = "list"></div>
+	<ul class = "paging_button"></ul>
 </body>
 </html>
