@@ -28,7 +28,10 @@ $(function(){
 					width:"50",
 					height:"50"
 				})
-				$(div).append(img)
+				var name = $("<span></span>").html(this.name);
+				var qty = $("<span></span>").html(this.qty);
+				var price = $("<span></span>").html(this.price);
+				$(div).append(img, "<br>상품명:\t", name, "<br>개수:\t",qty, "<br>가격:\t", price);
 				$("#list").append(div)
 			})
 		}
