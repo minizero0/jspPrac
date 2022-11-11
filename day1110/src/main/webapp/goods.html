@@ -34,9 +34,18 @@ $(function(){
 	var totalRecord = 0;	//전체 상품의 수
 	var totalPage = 1;		//전체 페이지 수 
 	
+	$(document).on("click",".liw",function(){
+		var pageNum = $(this).html()
+		console.log(pageNum)
+		$("#list").empty()
+		printItem(pageNum)
+	})
+	
+	
+	
 	function printPage(){
 		for(i = 1; i <= totalPage; i++){
-			var li = $("<li></li>").html(i);
+			var li = $("<li></li>").html(i).addClass("liw");
 			$(".paging_button").append(li);
 		}
 	}
@@ -65,8 +74,9 @@ $(function(){
 	$.ajax({
 		url:"ListGoods",
 		success:function(data){
+			
 			list = data;
-			totalRecord = list.size;
+			totalRecord = data.length;
 			totalPage = Math.ceil(totalRecord/pageSIZE);
 			
 			printItem(1);				//1	페이지 상품목록을 출력
