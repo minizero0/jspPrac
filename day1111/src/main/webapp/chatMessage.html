@@ -8,13 +8,7 @@
 $(function(){
 	
 	$("#btnAdd").click(function(){
-		var name = $("#name").val();
-		var message = $("#message").val();
-		console.log(name,message)
-		var data = {
-				name:name,
-				message:message
-		}
+		var data = $("#f").serializeArray()
 		
 		$.ajax({
 			url:"ChatMessage",
@@ -46,8 +40,10 @@ $(function(){
 </script>
 </head>
 <body>
-	닉네임: <input type="text" name = "name" id = "name"><br>
-	메시지: <input type="text" name = "message" id = "message"><br>
+	<form id = "f">
+	닉네임: <input type="text" name = "name" ><br>
+	메시지: <textarea rows="3" cols="40" name = "message"></textarea>
+	</form>
 	<button id = "btnAdd">글쓰기</button>
 	
 	<div id = "list">
