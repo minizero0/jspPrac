@@ -21,10 +21,11 @@ $(function(){
 	})
 	
 	function listMessage() {
+		$("#list").empty()
 		  $.ajax({
 			  url:"ChatMessage",
 			  success:function(data){
-				  $("#list").empty()
+				  
 				  $.each(data, function(){
 					  var h2 = $("<h2></h2>").html(this.name);
 					  var div = $("<div></div>").html(this.message);
