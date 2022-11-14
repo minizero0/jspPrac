@@ -17,7 +17,12 @@
 <script type="text/javascript" src = "jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$(".box").draggable({});
+		$(".box").draggable({
+			grid:[102,102],
+			stop:function(event,ui){
+				alert(ui.offset.top + ":" + ui.offset.left)
+			}
+		});
 	})
 </script>
 
