@@ -1,7 +1,9 @@
 package com.sist.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,7 +40,25 @@ public class GetBooks extends HttpServlet {
 		str += "<page>1</page>";
 		str += "<total>1</total>";
 		str += "<records>10</records>";
+		
+		for(BookVO b:list) {
+			str += "<row>";
+			str += "<cell>"+b.getBookid()+"</cell>";
+			str += "<cell>"+b.getBookname()+"</cell>";
+			str += "<cell>"+b.getPublisher()+"</cell>";
+			str += "<cell>"+b.getPrice()+"</cell>";
+			
+			str += "</row>";
+		}
+		
+		
 		str += "</rows>";
+		
+		response.setContentType("text/xml;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(str);
+		out.close();
+		
 	}
 
 	/**
