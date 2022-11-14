@@ -16,6 +16,8 @@ import com.sist.vo.BookVO;
 
 public class BookDAO {
 	private static BookDAO dao;
+	public static int totalRecord = 0;
+	public static int totalPage = 1;	
 	
 	public static BookDAO getInstance() {
 		if(dao == null) 
@@ -27,6 +29,47 @@ public class BookDAO {
 	private BookDAO() {
 		
 	}
+	
+	public int getTotalRecord() {
+		int n = 0 ;
+		String sql = "select count(*) from book";
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				n = rs.getInt(1);
+			}
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(conn!=null) {try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(stmt!=null) {try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			if(rs!=null) {try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+		}
+		return n;
+	}
+	
 	
 	public int maxBookid() {
 		int bookid = 0;
@@ -193,7 +236,11 @@ public class BookDAO {
 	}
 	
 	
-	public ArrayList<BookVO> findAll(){
+	public ArrayList<BookVO> findAll(int rows){
+		
+		totalRecord = getTotalRecord();
+		totalPage = (int)Math.ceil(totalRecord / (double)rows);
+		
 		ArrayList<BookVO> list = new ArrayList<>();
 		Connection conn = null;
 		Statement stmt = null;

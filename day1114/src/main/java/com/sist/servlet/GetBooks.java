@@ -33,13 +33,24 @@ public class GetBooks extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		int page = 1;
+		int rows = 10;
+		
+		if(request.getParameter("page")!=null) {
+			rows = Integer.parseInt(request.getParameter("rows"));
+		}
+		
+		if(request.getParameter("rows")!=null) {
+			rows = Integer.parseInt(request.getParameter("rows"));
+		}
+		
+		
 		BookDAO dao = BookDAO.getInstance();
-		ArrayList<BookVO> list = dao.findAll();
+		ArrayList<BookVO> list = dao.findAll(rows);
 		String str = "<rows>";
 		str += "<page>1</page>";
-		str += "<total>1</total>";
-		str += "<records>10</records>";
+		str += "<total>"+dao.totalPage+"</total>";
+		str += "<records>"+dao.totalRecord+"</records>";
 		
 		for(BookVO b:list) {
 			str += "<row>";
