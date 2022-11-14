@@ -73,11 +73,13 @@
 		];
 		
 		$.each(arr,function(){
-			var icon = "";
-			icon += "<div class = 'ui-widget-content ui-corner-all item'>";
-			icon += "<img src = 'images/"+this+"'>";
-			icon += "</div>";
-			$("#wrap").append(icon);
+			var icon = $("<div></div>");
+			$(div).addClass("ui-widget-content");
+			$(div).addClass("ui-corner-all");
+			$(div).addClass("item");
+			var img = $("<img/>").attr("src","'images/"+this);
+			$(div).append(img);
+			$("#wrap").append(div);
 		})
 	})
 </script>

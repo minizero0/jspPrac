@@ -73,11 +73,17 @@
 		];
 		
 		$.each(arr,function(){
-			var icon = "";
-			icon += "<div class = 'ui-widget-content ui-corner-all item'>";
-			icon += "<img src = 'images/"+this+"'>";
-			icon += "</div>";
-			$("#wrap").append(icon);
+			var div = $("<div></div>");
+			$(div).attr("class","ui-widget-content ui-corner-all item")
+			var img = $("<img/>").attr("src","images/"+this);
+			$(div).append(img);
+			$("#wrap").append(div);
+		})
+		
+		$("#wrao").draggable({
+			helper:"clone",
+			zIndex:100,
+			scroll:false
 		})
 	})
 </script>
