@@ -85,6 +85,23 @@
 			zIndex:100,
 			scroll:false
 		})
+		$("#dock").droppable({
+			accept:"#wrap > div",
+			drop:function(event,ui){
+				$(ui.draggable).fadeOut(function(){
+					$(this).appendTo("#dock").fadeIn();	
+				})
+			}
+		})
+		
+		$("body").droppable({
+			accept:"#dock > div",
+			drop:function(event,ui){
+				$(ui.draggable).fadeOut(function(){
+					$(this).appendTo("#wrap").fadeIn();
+				})
+			}
+		})
 	})
 </script>
 
