@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel = "stylesheet" href = "jquery-ui-1.13.1.custom/jquery-ui.min.css">
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src = "jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		function reset(){
+			var resetClass = "ui-corner-all ui-widget-context box";
+			$("#output").attr("class", resetClass);	
+		}
+		
+		reset();
+		
+		$("#menu").buttonset();
+		
+		$("#menu > input").change(function(){
+			reset();
+			$("#output").addClass("ui-state-"+$(this).val())
+		})
+		
+		$("button").click(function(){
+			reset();
+		})
+	})
+</script>
+
+</head>
+<body>
+	<div id = "menu">
+		<input type="radio" name="theme" id="highlight" value="highlight">
+		<label for="highlight">highlight</label>
+		
+		<input type="radio" name="theme" id="error" value="error">
+		<label for="error">error</label>
+		
+		<input type="radio" name="theme" id="error_text" value="error_text">
+		<label for="error_text">error_text</label>
+		
+		<input type="radio" name="theme" id="disabled" value="disabled">
+		<label for="disabled">disabled</label>
+		
+		<button>RESET</button>
+	</div>
+
+	<div id = "output">
+		<p>일본은 2019년부터 방위백서에 기존 독도 문제에 더해 ‘일본 초계기’ 및 ‘제주 국제관함식의 일본 불참’과 관련한 내용을 새롭게 추가했다. 2개 사안은 한국이 잘못한 것이고 한국에 책임이 있다는 취지다. 일방적 주장이다. 한국도 유감을 표명하고 내용 수정을 요구했다. 이런 항의 내용이 담긴 보도자료도 공개했다.
+
+그런데 한국은 올해 보도자료에 일본 초계기와 제주 국제관함식 사건을 적시하지 않았다. 두 사건을 두고 항의했다는 내용이 없다. 특히 일본 초계기 사건을 둘러싼 갈등은 양국 간 매우 민감한 문제여서 의문이 제기된다.
+
+일본 초계기 갈등 촉발 “일본 초계기의 위협비행은 세계 어느 나라 해군도 용납할 수 없는 행위이다. 우방국에 대한 심대한 도발행위다.” 2019년 1월 당시 정경두 국방부 장관은 일본 초계기 사건이 불거진 뒤 해군작전사령부를 방문한 자리에서 이같이 말했다. 정부가 이 문제를 상당히 심각하게 인식하고 있다는 점을 보여준다.</p>
+	</div>
+</body>
+</html>
