@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src = "https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src = "jquery.layout.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var data = "(3+2)*2";
+		console.log(data);
+		console.log(eval(data));
+		
+		var data2 = "alert('ok')";
+		eval(data2);
+		
+		$("button").click(function(){
+			eval($(this).html());
+		})
+	})
+</script>
+</head>
+<body>	
+	<button>alert('1')</button>
+	<button>alert('2')</button>
+</body>
+</html>
