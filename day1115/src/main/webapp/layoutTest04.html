@@ -26,15 +26,15 @@
 <script type="text/javascript">
 	$(function(){
 		var layout = $("body").layout({
-			east__size:300,
-			west__size:200,
-			south__size:100,
-			north__size:100,
-		})
+			applyDefaultStyles:true
+		});
 		
-		setTimeout(function(){
-			layout.close("north");
-		},3000);
+		$("button").click(function(){
+			var pane_selector = $("#pane_selector").val();
+			var methodName = $(this).html();
+			var evalString = "layout."+methodName+"('"+pane_selector+"')";
+			eval(evalString)
+		})
 	})
 </script>
 </head>
