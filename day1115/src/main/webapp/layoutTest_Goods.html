@@ -14,10 +14,11 @@
 	.item{
 		margin:5px;
 		width:100px;
-		height:100px;
+		height:200px;
 		background-color:white;
 		border-radius: 10px;
 		float: left;
+		padding: 5px;
 	}
 	
 	.big{
@@ -38,19 +39,29 @@
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#masonry_container").masonry({
-			itemSelector:".item",
-			columnWidth:110
-		})
+		
 		$.ajax({
 			url:"GetGoods",
 			success:function(data){
 				$.each(data,function(){
-					var fname = this.fname();
-					var div = $("<div></div>")
-					var img = $("<img/>").val("images/"+fname);
-					console.log(fname)
-					$("#masonry_container").append(img);
+					var item = $("<div></div>").addClass("item");
+					
+					var img = $("<img/>").attr({
+						src:"images/"+this.fname,
+						width:"80",
+						height:"80"
+					})
+					var no = $("<div></div>").html(this.no);
+					var name = $("<div></div>").html(this.name);
+					var qty = $("<div></div>").html(this.qty);
+					var price = $("<div></div>").html(this.price);
+					
+					$(item).append(img,no,name,qty,price);
+					$("#masonry_container").append(item);
+				})
+				$("#masonry_container").masonry({
+					itemSelector:".item",
+					columnWidth:120
 				})
 			}
 		})

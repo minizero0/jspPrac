@@ -17,7 +17,7 @@ import com.sist.vo.GoodsVO;
 /**
  * Servlet implementation class GetGoods
  */
-@WebServlet("GetGoods")
+@WebServlet("/GetGoods")
 public class GetGoods extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,9 +37,9 @@ public class GetGoods extends HttpServlet {
 		GoodsDAO dao = GoodsDAO.getInstance();
 		ArrayList<GoodsVO> list = dao.findAll();
 		Gson gson = new Gson();
-		gson.toJson(list);
+		String str = gson.toJson(list);
 		PrintWriter out = response.getWriter();
-		out.print(list);
+		out.print(str);
 		out.close();
 	}
 
