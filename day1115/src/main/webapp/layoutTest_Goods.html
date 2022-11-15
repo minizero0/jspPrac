@@ -26,10 +26,21 @@
 		height: 430px;
 	}
 	
+	.big > img{
+		width: 200px;
+		height: 200px;
+	}
+	
 	.normal{
 		width: 210px;
 		height: 210px;
 	}
+	
+	.normal > img{
+		width:140;
+		height:140;
+	}
+	
 	.small{
 		width: 100px;
 		height: 100px;
@@ -55,6 +66,15 @@
 					var name = $("<div></div>").html(this.name);
 					var qty = $("<div></div>").html(this.qty);
 					var price = $("<div></div>").html(this.price);
+					
+					var fname = this.fname;
+					if(fname.match('stock')){
+						$(item).addClass("small");
+					}else if(fname.match('cloth')){
+						$(item).addClass("big");
+					}else{
+						$(item).addClass("normal");
+					}
 					
 					$(item).append(img,no,name,qty,price);
 					$("#masonry_container").append(item);
