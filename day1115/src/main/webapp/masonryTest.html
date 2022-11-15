@@ -40,7 +40,8 @@
 	$(function(){
 		$("#masonry_container").masonry({
 			itemSelector:".item",
-			columnWidth:110
+			columnWidth:110,
+			isAnimated:true
 		})
 		
 		$(document).on("click",".item",function(){
@@ -49,7 +50,7 @@
 		})
 		
 		$("#add_button").click(function(){
-			var item = $("<div></div>").addClass("item").html("late")
+			var item = $("#masonry_container").children().clone();
 			$("#masonry_container").append(item);
 			$("#masonry_container").masonry("reload");
 		})
