@@ -12362,7 +12362,7 @@ jQuery(selector).each(function() {
 	for (a = 0; a < rowChecked.length; a++) {
 		jQuery(this).jqGrid("setSelection",rowChecked[a]);
 	}
-	$("#selectopts").css("display","none");
+	
 });
 };
 

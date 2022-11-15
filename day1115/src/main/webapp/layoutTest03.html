@@ -25,12 +25,16 @@
 <script type="text/javascript" src = "jquery.layout.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("body").layout({
+		var layout = $("body").layout({
 			east__size:300,
 			west__size:200,
 			south__size:100,
 			north__size:100,
 		})
+		
+		setTimeout(function(){
+			layout.close("north");
+		},3000);
 	})
 </script>
 </head>
