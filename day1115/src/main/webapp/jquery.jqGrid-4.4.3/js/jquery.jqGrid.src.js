@@ -8821,6 +8821,7 @@ $.jgrid.extend({
 					$(tbd,navtbl)
 					.attr({"title":o.searchtitle  || "",id:pSearch.id || "search_"+elemids})
 					.click(function(){
+						console.log('OK');
 						if (!$(this).hasClass('ui-state-disabled')) {
 							if($.isFunction( o.searchfunc )) {
 								o.searchfunc.call($t, pSearch);
@@ -8828,6 +8829,14 @@ $.jgrid.extend({
 								$($t).jqGrid("searchGrid",pSearch);
 							}
 						}
+						$(".selectopts").empty();
+						var op1 = $("<option></option>").html(">");
+						var op2 = $("<option></option>").html(">=");
+						var op3 = $("<option></option>").html("<");
+						var op4 = $("<option></option>").html("<=");
+						var op5 = $("<option></option>").html("=");
+						var op6 = $("<option></option>").html("!=");
+						$(".selectopts").append(op1,op2,op3,op4,op5,op6);
 						return false;
 					}).hover(onHoverIn, onHoverOut);
 					if (pSearch.showOnLoad && pSearch.showOnLoad === true) {
