@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="jquery.validate.password.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="jquery.validate.js"></script>
+<script type="text/javascript" src="jquery.validate.password.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#btnSaveSession").click(function(){
+			var data = {
+					name:$("#name").val(),
+					age:$("#age").val(),
+					addr:$("#addr").val()
+			}
+			var str = JSON.stringify(data)
+			sessionStorage.setItem("data",str);
+		})
+		
+		$("#btnReadSession").click(function(){
+			var data = sessionStorage.getItem("data")
+			var obj = JSON.parse(data);
+			
+			$.each(objs, function(key,value){
+				$("#output").append($("<div></div>").html(key+":"+value))
+			})
+		})
+	});	
+</script>
+</head>
+<body>	
+	<h3>SessionStorage</h3>
+	
+	이름 : <input type="text" id="name"><br>
+	나이 : <input type="text" id="age"><br>
+	주소 : <input type="text" id="addr"><br>
+	<button id = "btnSaveSession">저장</button>
+	<button id = "btnReadSession">조회</button>
+	
+	<div id = "output">
+	
+	</div>
+	
+
+</body>
+</html>
