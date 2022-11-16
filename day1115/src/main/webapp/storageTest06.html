@@ -9,6 +9,22 @@
 <script type="text/javascript" src="jquery.validate.password.js"></script>
 <script type="text/javascript">
 	$(function(){
+		
+		setInterval(function(){
+			if(sessionSotrage.getItem("member") != null){
+				member = JSON.parse(sessionStorage.getItem("member"));
+				$.each(member,function(){
+					$.ajax({
+						url:"insertMember",
+						data:member,
+						success:function(){
+							member[i][j].value
+						}
+					})
+				})
+			}
+		})
+		
 		$("#btnSaveSession").click(function(){
 			var member;
 			
