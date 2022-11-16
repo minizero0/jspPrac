@@ -11,19 +11,31 @@
 	$(function(){
 		
 		setInterval(function(){
-			if(sessionSotrage.getItem("member") != null){
-				member = JSON.parse(sessionStorage.getItem("member"));
-				$.each(member,function(){
-					$.ajax({
-						url:"insertMember",
-						data:member,
-						success:function(){
-							member[i][j].value
+			
+			var total = 0;
+			$.ajax({
+				url:"GetTotal",
+				success:function(data){
+					total = Number(data);
+					if(sessionStorage.getItem("member") != null){
+						member = JSON.parse(sessionStorage.getItem("member"));
+						
+						if(member.length > total){
+							for(i=total; i<member.length; i++){
+								var row = member[i];
+								$.ajax({
+									url:"insertMember",
+									data:row,
+									success:function(){
+										
+									}
+								})
+							}
 						}
-					})
-				})
-			}
-		})
+					}
+				}
+			})
+		},3000)
 		
 		$("#btnSaveSession").click(function(){
 			var member;
@@ -39,7 +51,7 @@
 			sessionStorage.setItem("member",str)
 			
 			$("input[type=text]").val("")
-			$("#btnReadSession`").trigger("click");
+			$("#btnReadSession").trigger("click");
 			
 		})
 		

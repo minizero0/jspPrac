@@ -29,6 +29,32 @@ private static SmemberDAO dao;
 		
 	}
 	
+	public int getTotalRecord() {
+		int n = 0;
+		String sql = "select count(*) from smember";
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			Context context = new InitialContext();
+			DataSource ds =(DataSource) context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				n = rs.getInt(1);
+			}
+			
+		}catch (Exception e) {
+			System.out.println("예외발생:"+e.getMessage());
+		}finally {
+			if(rs != null) { try{rs.close();}catch(Exception e) {} }
+			if(stmt != null) { try{stmt.close();}catch(Exception e) {} }
+			if(conn != null) { try{conn.close();}catch(Exception e) {} }
+		}
+		return n;
+	}
+	
 	public int insertSmember(SmemberVO sv) {
 		int re = -1;
 		String sql = "insert into smember(no,name,age,addr) values(seq_smember.nextval,?,?,?)";
