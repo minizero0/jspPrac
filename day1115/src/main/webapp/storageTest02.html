@@ -9,40 +9,33 @@
 <script type="text/javascript" src="jquery.validate.password.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#btnSaveLocal").click(function(){
-			var data = $("#text1").val();
-			localStorage.setItem("text1",data);
-			
-			
-		})
-		
-		$("#btnReadLocal").click(function(){
-			
-			$("#span1").html(localStorage.getItem("text1"));
-		})
-		
 		$("#btnSaveSession").click(function(){
-			var data = $("#text2").val();
-			sessionStorage.setItem("text2",data)
+			var data = {
+					no:1,
+					name:"축구공",
+					price:35000,
+					qty:10,
+					fname:"ball1.jpg"
+			}
+			var str = JSON.stringify(data)
+			
+			sessionStorage.setItem("data",str);
 		})
 		
 		$("#btnReadSession").click(function(){
-			$("#span2").html(sessionStorage.getItem("text2"))
+			var data = sessionStorage.getItem("data")
+			var obj = JSON.parse(data);
+			console.log(obj)
+			
+			$("#span2").html(obj.no)
+		
 		})
 	});	
 </script>
 </head>
 <body>	
-	<h3>Local Storage</h3>
-	<button id = "btnSaveLocal">저장</button>
-	<input type="text" id = "text1">
-	<br>
-	<button id = "btnReadLocal">조회</button>
-	<span id= "span1"></span>
-	<hr>
 	<h3>SessionStorage</h3>
 	<button id = "btnSaveSession">저장</button>
-	<input type="text" id = "text2">
 	<br>
 	<button id = "btnReadSession">조회</button>
 	<span id= "span2"></span>
