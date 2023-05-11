@@ -8,3 +8,4 @@ lotte
 mini
 asd
 asdasd
+asd
