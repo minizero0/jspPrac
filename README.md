@@ -5,3 +5,4 @@ kakao chatbot
 12
 34
 getmapping
+postmapping
