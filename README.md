@@ -4,4 +4,4 @@ checking authentication
 kakao chatbot
 session ID
 ENABS
-ASD
+ASD##MSA##
