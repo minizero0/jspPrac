@@ -5,4 +5,3 @@ kakao chatbot
 session ID
 ENABS
 ASD
-##: MSA##
